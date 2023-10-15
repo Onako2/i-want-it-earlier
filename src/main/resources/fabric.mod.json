@@ -1,41 +1,31 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "iwie",
 	"version": "${version}",
-	"name": "Example mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "I want it earlier!",
+	"description": "This Mod adds items and blocks before they are even in game!",
 	"authors": [
-		"Me!"
+		"Onako2"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/Onako2/i-want-it-earlier"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/modid/icon.png",
+	"license": "MIT",
+	"icon": "assets/iwie/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
-		],
-		"client": [
-			"com.example.ExampleModClient"
+			"rs.onako2.Init"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
-		{
-			"config": "modid.client.mixins.json",
-			"environment": "client"
-		}
+		"iwie.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.2",
 		"java": ">=17",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

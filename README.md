@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# I want it earlier
 
-## Setup
+## Functionality
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+This Minecraft Mod adds blocks and items before Mojang even publishes them in snapshots!  
 
-## License
+### Contributions
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+Feel free to contribute and assets(also translations) or code!
