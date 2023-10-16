@@ -1,9 +1,9 @@
 {
     "block.iwie.test": "Test",
-    "block.iwie.chiseled_mudstone_bricks": "Chiseled Mud bricks",
-    "block.iwie.mudstone_bricks": "Mud Bricks",
+    "block.iwie.chiseled_tuff_bricks": "Chiseled Tuff Bricks",
+    "block.iwie.tuff_bricks": "Tuff Bricks",
     "block.iwie.copper_grid": "Copper Grid",
-    "block.iwie.copper_lamp": "Copper Lamp",
-    "block.iwie.oxidized_copper_lamp": "Oxidized Copper Lamp",
+    "block.iwie.copper_bulb": "Copper Bulb",
+    "block.iwie.oxidized_copper_bulb": "Oxidized Copper Bulb",
     "itemGroup.iwie.main": "I want it earlier!"
 }

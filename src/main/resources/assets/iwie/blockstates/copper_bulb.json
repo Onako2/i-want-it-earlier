@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "iwie:block/copper_lamp"
+            "model": "iwie:block/copper_bulb"
         }
     }
 }

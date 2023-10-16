@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "iwie:block/mudstone_bricks"
+            "model": "iwie:block/tuff_bricks"
         }
     }
 }

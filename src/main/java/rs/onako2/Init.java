@@ -25,26 +25,26 @@ public class Init implements ModInitializer {
 
 	public static final Block TEST  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block OXIDIZED_COPPER_LAMP  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block CHISELED_MUDSTONE_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block CHISELED_TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block COPPER_LAMP  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 	public static final Block COPPER_GRID  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block MUDSTONE_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 
 	    private static final ItemGroup IWIE = FabricItemGroup.builder()
     	.icon(() -> new ItemStack(TEST))
     	.displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
-    		entries.add(OXIDIZED_COPPER_LAMP);
-			entries.add(CHISELED_MUDSTONE_BRICKS);
-			entries.add(COPPER_LAMP);
+    		entries.add(OXIDIZED_COPPER_BULB);
+			entries.add(CHISELED_TUFF_BRICKS);
+			entries.add(COPPER_BULB);
 			entries.add(COPPER_GRID);
-			entries.add(MUDSTONE_BRICKS);
+			entries.add(TUFF_BRICKS);
     	})
     	.build();
 
@@ -63,19 +63,19 @@ public class Init implements ModInitializer {
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "test"), TEST);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "test"), new BlockItem(TEST, new FabricItemSettings()));
 
-		Registry.register(Registries.BLOCK, new Identifier("iwie", "oxidized_copper_lamp"), OXIDIZED_COPPER_LAMP);
-		Registry.register(Registries.ITEM, new Identifier("iwie", "oxidized_copper_lamp"), new BlockItem(OXIDIZED_COPPER_LAMP, new FabricItemSettings()));
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "oxidized_copper_bulb"), OXIDIZED_COPPER_BULB);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "oxidized_copper_bulb"), new BlockItem(OXIDIZED_COPPER_BULB, new FabricItemSettings()));
 
-		Registry.register(Registries.BLOCK, new Identifier("iwie", "chiseled_mudstone_bricks"), CHISELED_MUDSTONE_BRICKS);
-		Registry.register(Registries.ITEM, new Identifier("iwie", "chiseled_mudstone_bricks"), new BlockItem(CHISELED_MUDSTONE_BRICKS, new FabricItemSettings()));
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "chiseled_tuff_bricks"), CHISELED_TUFF_BRICKS);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "chiseled_tuff_bricks"), new BlockItem(CHISELED_TUFF_BRICKS, new FabricItemSettings()));
 
-		Registry.register(Registries.BLOCK, new Identifier("iwie", "copper_lamp"), COPPER_LAMP);
-		Registry.register(Registries.ITEM, new Identifier("iwie", "copper_lamp"), new BlockItem(COPPER_LAMP, new FabricItemSettings()));
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "copper_bulb"), COPPER_BULB);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "copper_bulb"), new BlockItem(COPPER_BULB, new FabricItemSettings()));
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "copper_grid"), COPPER_GRID);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "copper_grid"), new BlockItem(COPPER_GRID, new FabricItemSettings()));
 
-		Registry.register(Registries.BLOCK, new Identifier("iwie", "mudstone_bricks"), MUDSTONE_BRICKS);
-		Registry.register(Registries.ITEM, new Identifier("iwie", "mudstone_bricks"), new BlockItem(MUDSTONE_BRICKS, new FabricItemSettings()));
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "tuff_bricks"), TUFF_BRICKS);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "tuff_bricks"), new BlockItem(TUFF_BRICKS, new FabricItemSettings()));
 	}
 }

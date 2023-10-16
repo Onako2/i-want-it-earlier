@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-      "all": "iwie:block/chiseled_mudstone_bricks"
+      "all": "iwie:block/chiseled_tuff_bricks"
   }
 }

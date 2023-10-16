@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "iwie:block/oxcidized_copper_lamp"
+        "all": "iwie:block/copper_bulb"
     }
 }
