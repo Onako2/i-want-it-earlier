@@ -25,17 +25,23 @@ public class Init implements ModInitializer {
 
 	public static final Block TEST  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(3));
 
-	public static final Block WEATHERED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block WEATHERED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(7));
 
-	public static final Block EXPOSED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block EXPOSED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(11));
 
 	public static final Block CHISELED_TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(15));
 
-	public static final Block COPPER_GRID  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+
+	public static final Block WEATHERED_COPPER_GRID  = new Block(FabricBlockSettings.create().strength(4.0f));
+
+	public static final Block EXPOSED_COPPER_GRID  = new Block(FabricBlockSettings.create().strength(4.0f));
+
+	public static final Block OXIDIZED_COPPER_GRID  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
@@ -48,6 +54,9 @@ public class Init implements ModInitializer {
 			entries.add(WEATHERED_COPPER_BULB);
 			entries.add(EXPOSED_COPPER_BULB);
 			entries.add(COPPER_BULB);
+			entries.add(OXIDIZED_COPPER_GRID);
+			entries.add(WEATHERED_COPPER_GRID);
+			entries.add(EXPOSED_COPPER_GRID);
 			entries.add(COPPER_GRID);
 			entries.add(TUFF_BRICKS);
 			entries.add(CHISELED_TUFF_BRICKS);
@@ -86,6 +95,15 @@ public class Init implements ModInitializer {
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "copper_grid"), COPPER_GRID);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "copper_grid"), new BlockItem(COPPER_GRID, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "exposed_copper_grid"), EXPOSED_COPPER_GRID);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "exposed_copper_grid"), new BlockItem(EXPOSED_COPPER_GRID, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "oxidized_copper_grid"), OXIDIZED_COPPER_GRID);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "oxidized_copper_grid"), new BlockItem(OXIDIZED_COPPER_GRID, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "weathered_copper_grid"), WEATHERED_COPPER_GRID);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "weathered_copper_grid"), new BlockItem(WEATHERED_COPPER_GRID, new FabricItemSettings()));
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "tuff_bricks"), TUFF_BRICKS);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "tuff_bricks"), new BlockItem(TUFF_BRICKS, new FabricItemSettings()));
