@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "iwie:block/weathered_copper_bulb"
+    }
+}

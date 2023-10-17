@@ -8,7 +8,7 @@
 		"Onako2"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
+		"homepage": "https://modrinth.com/mod/i-want-it-earlier",
 		"sources": "https://github.com/Onako2/i-want-it-earlier"
 	},
 	"license": "MIT",
@@ -26,6 +26,6 @@
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.2",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": ">=0.77"
 	}
 }

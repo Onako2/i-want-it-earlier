@@ -5,5 +5,7 @@
     "block.iwie.copper_grid": "Copper Grid",
     "block.iwie.copper_bulb": "Copper Bulb",
     "block.iwie.oxidized_copper_bulb": "Oxidized Copper Bulb",
-    "itemGroup.iwie.main": "I want it earlier!"
+    "itemGroup.iwie.main": "I want it earlier!",
+    "block.iwie.weathered_copper_bulb": "Weathered Copper Bulb",
+    "block.iwie.exposed_copper_bulb": "Exposed Copper Bulb"
 }

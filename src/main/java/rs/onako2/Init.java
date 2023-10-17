@@ -27,6 +27,10 @@ public class Init implements ModInitializer {
 
 	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
 
+	public static final Block WEATHERED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+
+	public static final Block EXPOSED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
+
 	public static final Block CHISELED_TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f));
@@ -41,10 +45,12 @@ public class Init implements ModInitializer {
     	.displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
     		entries.add(OXIDIZED_COPPER_BULB);
-			entries.add(CHISELED_TUFF_BRICKS);
+			entries.add(WEATHERED_COPPER_BULB);
+			entries.add(EXPOSED_COPPER_BULB);
 			entries.add(COPPER_BULB);
 			entries.add(COPPER_GRID);
 			entries.add(TUFF_BRICKS);
+			entries.add(CHISELED_TUFF_BRICKS);
     	})
     	.build();
 
@@ -65,6 +71,12 @@ public class Init implements ModInitializer {
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "oxidized_copper_bulb"), OXIDIZED_COPPER_BULB);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "oxidized_copper_bulb"), new BlockItem(OXIDIZED_COPPER_BULB, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "weathered_copper_bulb"), WEATHERED_COPPER_BULB);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "weathered_copper_bulb"), new BlockItem(WEATHERED_COPPER_BULB, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "exposed_copper_bulb"), EXPOSED_COPPER_BULB);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "exposed_copper_bulb"), new BlockItem(EXPOSED_COPPER_BULB, new FabricItemSettings()));
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "chiseled_tuff_bricks"), CHISELED_TUFF_BRICKS);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "chiseled_tuff_bricks"), new BlockItem(CHISELED_TUFF_BRICKS, new FabricItemSettings()));
