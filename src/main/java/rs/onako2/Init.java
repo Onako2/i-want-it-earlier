@@ -107,5 +107,7 @@ public class Init implements ModInitializer {
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "tuff_bricks"), TUFF_BRICKS);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "tuff_bricks"), new BlockItem(TUFF_BRICKS, new FabricItemSettings()));
+
+		
 	}
 }
