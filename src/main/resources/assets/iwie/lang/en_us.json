@@ -1,14 +1,24 @@
 {
     "block.iwie.test": "Test",
+
     "block.iwie.chiseled_tuff_bricks": "Chiseled Tuff Bricks",
     "block.iwie.tuff_bricks": "Tuff Bricks",
-    "block.iwie.copper_grid": "Copper Grid",
+    "block.iwie.polished_chiseled_tuff": "Polished Chiseled Tuff Bricks",
+
+    "itemGroup.iwie.main": "I want it earlier!",
+
     "block.iwie.copper_bulb": "Copper Bulb",
     "block.iwie.oxidized_copper_bulb": "Oxidized Copper Bulb",
-    "itemGroup.iwie.main": "I want it earlier!",
     "block.iwie.weathered_copper_bulb": "Weathered Copper Bulb",
     "block.iwie.exposed_copper_bulb": "Exposed Copper Bulb",
+
+    "block.iwie.copper_grid": "Copper Grid",
     "block.iwie.oxidized_copper_grid": "Oxidized Copper Grid",
     "block.iwie.exposed_copper_grid": "Exposed Copper Grid",
-    "block.iwie.weathered_copper_grid": "Weathered Copper Grid"
+    "block.iwie.weathered_copper_grid": "Weathered Copper Grid",
+
+    "block.iwie.oxidized_chiseled_copper": "Oxidized Chiseled Copper",
+    "block.iwie.exposed_chiseled_copper": "Exposed Chiseled Copper",
+    "block.iwie.weathered_chiseled_copper": "Weathered Chiseled Copper",
+    "block.iwie.chiseled_copper": "Weathered Chiseled Copper"
 }

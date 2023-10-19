@@ -5,11 +5,13 @@
 	"name": "I want it earlier!",
 	"description": "This Mod adds items and blocks before they are even in game!",
 	"authors": [
-		"Onako2"
+		"Onako2",
+		"MrKnowledge"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/i-want-it-earlier",
-		"sources": "https://github.com/Onako2/i-want-it-earlier"
+		"sources": "https://github.com/Onako2/i-want-it-earlier",
+		"discord": "https://discord.gg/nFpa776nQk"
 	},
 	"license": "MIT",
 	"icon": "assets/iwie/icon.png",
