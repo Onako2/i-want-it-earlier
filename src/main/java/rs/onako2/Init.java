@@ -43,6 +43,8 @@ public class Init implements ModInitializer {
 
 	public static final Block OXIDIZED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
 
+	public static final Block TRIAL_SPAWNER  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+
 	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 	public static final Block CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
@@ -54,6 +56,8 @@ public class Init implements ModInitializer {
 	public static final Block OXIDIZED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 	public static final Block POLISHED_CHISELED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f));
+
+	public static final Block POLISHED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f));
 
 
 	    private static final ItemGroup IWIE = FabricItemGroup.builder()
@@ -69,16 +73,17 @@ public class Init implements ModInitializer {
 			entries.add(EXPOSED_COPPER_GRID);
 			entries.add(COPPER_GRID);
 			entries.add(TUFF_BRICKS);
+			entries.add(POLISHED_TUFF);
 			entries.add(CHISELED_TUFF_BRICKS);
 			entries.add(POLISHED_CHISELED_TUFF);
 			entries.add(OXIDIZED_CHISELED_COPPER);
 			entries.add(WEATHERED_CHISELED_COPPER);
 			entries.add(EXPOSED_CHISELED_COPPER);
 			entries.add(CHISELED_COPPER);
+			entries.add(TRIAL_SPAWNER);
     	})
     	.build();
 
-			
 
 	@Override
 	public void onInitialize() {
@@ -120,6 +125,9 @@ public class Init implements ModInitializer {
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "tuff_bricks"), TUFF_BRICKS);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "tuff_bricks"), new BlockItem(TUFF_BRICKS, new FabricItemSettings()));
 
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "polished_tuff"), POLISHED_TUFF);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "polished_tuff"), new BlockItem(POLISHED_TUFF, new FabricItemSettings()));
+
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "polished_chiseled_tuff"), POLISHED_CHISELED_TUFF);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "polished_chiseled_tuff"), new BlockItem(POLISHED_CHISELED_TUFF, new FabricItemSettings()));
 
@@ -134,6 +142,9 @@ public class Init implements ModInitializer {
 
 		Registry.register(Registries.BLOCK, new Identifier("iwie", "oxidized_chiseled_copper"), OXIDIZED_CHISELED_COPPER);
 		Registry.register(Registries.ITEM, new Identifier("iwie", "oxidized_chiseled_copper"), new BlockItem(OXIDIZED_CHISELED_COPPER, new FabricItemSettings()));
+
+		Registry.register(Registries.BLOCK, new Identifier("iwie", "trial_spawner"), TRIAL_SPAWNER);
+		Registry.register(Registries.ITEM, new Identifier("iwie", "trial_spawner"), new BlockItem(TRIAL_SPAWNER, new FabricItemSettings()));
 		
 	}
 }
