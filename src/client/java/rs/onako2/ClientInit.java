@@ -11,5 +11,6 @@ public class ClientInit implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(Init.EXPOSED_COPPER_GRID, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(Init.OXIDIZED_COPPER_GRID, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(Init.WEATHERED_COPPER_GRID, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(Init.TRIAL_SPAWNER, RenderLayer.getCutout());
 	}
 }
