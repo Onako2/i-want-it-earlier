@@ -43,7 +43,7 @@ public class Init implements ModInitializer {
 
 	public static final Block OXIDIZED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
 
-	public static final Block TRIAL_SPAWNER  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+	public static final Block TRIAL_SPAWNER  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).luminance(1));
 
 	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
 
