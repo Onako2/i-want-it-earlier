@@ -25,39 +25,39 @@ public class Init implements ModInitializer {
 
 	public static final Block TEST  = new Block(FabricBlockSettings.create().strength(4.0f));
 
-	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(3));
+	public static final Block OXIDIZED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(3).requiresTool());
 
-	public static final Block WEATHERED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(7));
+	public static final Block WEATHERED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(7).requiresTool());
 
-	public static final Block EXPOSED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(11));
+	public static final Block EXPOSED_COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(11).requiresTool());
 
-	public static final Block CHISELED_TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block CHISELED_TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(15));
+	public static final Block COPPER_BULB  = new Block(FabricBlockSettings.create().strength(4.0f).luminance(15).requiresTool());
 
-	public static final Block COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+	public static final Block COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).requiresTool());
 
-	public static final Block WEATHERED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+	public static final Block WEATHERED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).requiresTool());
 
-	public static final Block EXPOSED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+	public static final Block EXPOSED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).requiresTool());
 
-	public static final Block OXIDIZED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f));
+	public static final Block OXIDIZED_COPPER_GRID  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).requiresTool());
 
-	public static final Block TRIAL_SPAWNER  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).luminance(1));
+	public static final Block TRIAL_SPAWNER  = new Block(FabricBlockSettings.create().nonOpaque().strength(4.0f).luminance(8));
 
-	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block TUFF_BRICKS  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 	
-	public static final Block EXPOSED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block EXPOSED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block WEATHERED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block WEATHERED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block OXIDIZED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block OXIDIZED_CHISELED_COPPER  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block POLISHED_CHISELED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block POLISHED_CHISELED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
-	public static final Block POLISHED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block POLISHED_TUFF  = new Block(FabricBlockSettings.create().strength(4.0f).requiresTool());
 
 
 	    private static final ItemGroup IWIE = FabricItemGroup.builder()
