@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:oxidized_copper"
+  },
+  "result": "iwie:oxidized_chiseled_copper"
+}
