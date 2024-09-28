@@ -2,7 +2,7 @@
 
 ## Functionality
 
-This Minecraft Mod adds blocks and items before Mojang even publishes them in snapshots!  
+This Minecraft Mod adds blocks and items before Mojang even publishes them in snapshots!
 
 ### Contributions
 
