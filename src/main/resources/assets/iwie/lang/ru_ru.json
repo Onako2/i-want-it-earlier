@@ -1,9 +1,4 @@
 {
-    "block.iwie.test": "Тест",
-    "block.iwie.chiseled_tuff_bricks": "Туфовый кирпич",
-    "block.iwie.tuff_bricks": "Резной туфовый кирпич ",
-    "block.iwie.copper_grid": "Медная сетка",
-    "block.iwie.copper_bulb": "Медная лампочка",
-    "block.iwie.oxidized_copper_bulb": "Окисленная медная лампочка",
-    "itemGroup.iwie.main": "I want it earlier!"
+  "block.iwie.test": "Тест",
+  "itemGroup.iwie.main": "I want it earlier!"
 }

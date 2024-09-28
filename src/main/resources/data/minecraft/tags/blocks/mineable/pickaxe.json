@@ -1,21 +1,5 @@
 {
-    "replace": false,
-    "values": [
-      "iwie:chiseled_tuff_bricks",
-      "iwie:copper_bulb",
-      "iwie:chiseled_copper",
-      "iwie:copper_grid",
-      "iwie:exposed_copper_bulb",
-      "iwie:exposed_chiseled_copper",
-      "iwie:exposed_copper_grid",
-      "iwie:oxidized_copper_bulb",
-      "iwie:oxidized_chiseled_copper",
-      "iwie:oxidized_copper_grid",
-      "iwie:polished_tuff",
-      "iwie:tuff_bricks",
-      "iwie:weathered_copper_bulb",
-      "iwie:weathered_copper_grid",
-      "iwie:weathered_chiseled_copper",
-      "iwie:polished_chiseled_tuff"
-    ]
-  }
+  "replace": false,
+  "values": [
+  ]
+}

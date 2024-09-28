@@ -1,33 +1,33 @@
 {
-	"schemaVersion": 1,
-	"id": "iwie",
-	"version": "${version}",
-	"name": "I want it earlier!",
-	"description": "This Mod adds items and blocks before they are even in game!",
-	"authors": [
-		"Onako2",
-		"MrKnowledge"
-	],
-	"contact": {
-		"homepage": "https://modrinth.com/mod/i-want-it-earlier",
-		"sources": "https://github.com/Onako2/i-want-it-earlier",
-		"discord": "https://discord.gg/nFpa776nQk"
-	},
-	"license": "MIT",
-	"icon": "assets/iwie/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"rs.onako2.Init"
-		],
-		"client": [
-			"rs.onako2.ClientInit"
-		]
-	},
-	"depends": {
-		"fabricloader": ">=0.14.22",
-		"minecraft": ">=1.20.1",
-		"java": ">=17",
-		"fabric-api": ">=0.78"
-	}
+  "schemaVersion": 1,
+  "id": "iwie",
+  "version": "${version}",
+  "name": "I want it earlier!",
+  "description": "This Mod adds items and blocks before they are even in game!",
+  "authors": [
+    "Onako2",
+    "MrKnowledge"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/i-want-it-earlier",
+    "sources": "https://github.com/Onako2/i-want-it-earlier",
+    "discord": "https://discord.gg/nFpa776nQk"
+  },
+  "license": "MIT",
+  "icon": "assets/iwie/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "rs.onako2.Init"
+    ],
+    "client": [
+      "rs.onako2.ClientInit"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": ">=1.21.1",
+    "java": ">=21",
+    "fabric-api": ">=0.78"
+  }
 }

@@ -1,8 +1,0 @@
-{
-    "parent": "minecraft:block/cube_bottom_top",
-    "textures": {
-      "bottom": "iwie:block/polished_chiseled_tuff_top_buttom",
-      "side": "iwie:block/polished_chiseled_tuff_sides",
-      "top": "iwie:block/polished_chiseled_tuff_top_buttom"
-    }
-  }
