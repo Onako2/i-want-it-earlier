@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "iwie:pale_log",
+    "iwie:pale_planks",
+    "iwie:pale_stairs",
+    "iwie:pale_slab",
+    "iwie:pale_fence",
+    "iwie:pale_fence_gate",
+    "iwie:pale_door",
+    "iwie:pale_trapdoor",
+    "iwie:pale_button",
+    "iwie:pale_pressure_plate",
+    "iwie:pale_sign",
+    "iwie:pale_wall_sign"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "iwie:block/pale_log_top",
+    "side": "iwie:block/pale_log"
+  }
+}

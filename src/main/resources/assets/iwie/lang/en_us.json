@@ -1,4 +1,20 @@
 {
   "block.iwie.test": "Test",
-  "itemGroup.iwie.main": "I want it earlier!"
+  "itemGroup.iwie.main": "I want it earlier!",
+  "item.iwie.test": "Test",
+  "block.iwie.pale_log": "Pale Log",
+  "block.iwie.pale_short_grass": "Pale Grass",
+  "block.iwie.pale_moss_block": "Pale Moss Block",
+  "block.iwie.pale_moss_carpet": "Pale Moss Carpet",
+  "block.iwie.pale_planks": "Pale Planks",
+  "block.iwie.pale_stairs": "Pale Stairs",
+  "block.iwie.pale_slab": "Pale Slab",
+  "block.iwie.pale_fence": "Pale Fence",
+  "block.iwie.pale_fence_gate": "Pale Fence Gate",
+  "block.iwie.pale_door": "Pale Door",
+  "block.iwie.pale_trapdoor": "Pale Trapdoor",
+  "block.iwie.pale_button": "Pale Button",
+  "block.iwie.pale_pressure_plate": "Pale Pressure Plate",
+  "block.iwie.pale_sign": "Pale Sign",
+  "block.iwie.pale_wall_sign": "Pale Wall Sign"
 }

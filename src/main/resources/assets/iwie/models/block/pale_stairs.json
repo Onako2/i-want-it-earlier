@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "iwie:block/pale_planks",
+    "side": "iwie:block/pale_planks",
+    "top": "iwie:block/pale_planks"
+  }
+}

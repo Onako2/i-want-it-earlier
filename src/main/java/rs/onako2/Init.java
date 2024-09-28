@@ -2,12 +2,14 @@ package rs.onako2;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
+import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -21,15 +23,34 @@ public class Init implements ModInitializer {
 
     public static final Block TEST = new Block(AbstractBlock.Settings.create().strength(4.0f));
 
+    public static final Block PALE_LOG = Util.createLogBlock(MapColor.PALE_YELLOW, MapColor.GRAY);
+
+    public static final Block PALE_SHORT_GRASS = new ShortPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block PALE_MOSS_BLOCK = new MossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block PALE_MOSS_CARPET = new CarpetBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block PALE_PLANKS = new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable());
+
+    public static final Block PALE_STRAIRS = new StairsBlock(PALE_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(PALE_PLANKS));
+
+    public static final Block PALE_SLAB = new SlabBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable());
 
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
                 entries.add(TEST);
+                entries.add(PALE_LOG);
+                entries.add(PALE_SHORT_GRASS);
+                entries.add(PALE_MOSS_BLOCK);
+                entries.add(PALE_MOSS_CARPET);
+                entries.add(PALE_PLANKS);
+                entries.add(PALE_STRAIRS);
+                entries.add(PALE_SLAB);
             })
             .build();
-
 
     @Override
     public void onInitialize() {
@@ -37,6 +58,7 @@ public class Init implements ModInitializer {
         LOGGER.info("Initializing items and blocks from 1.22 update!");
 
         Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
+
 
         ModRegistry.registerBlocks();
         ModRegistry.registerItems();
