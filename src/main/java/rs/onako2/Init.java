@@ -37,6 +37,12 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_SLAB = new SlabBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable());
 
+    public static final Block PALE_FENCE = new FenceBlock(AbstractBlock.Settings.create().mapColor(PALE_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD).burnable());
+
+    public static final Block PALE_FENCE_GATE = new FenceGateBlock(WoodType.OAK, AbstractBlock.Settings.create().mapColor(PALE_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).burnable());
+
+
+    //public static final Block PALE_SAPLING = new SaplingBlock(PaleSapling.PALE, AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
@@ -49,8 +55,12 @@ public class Init implements ModInitializer {
                 entries.add(PALE_PLANKS);
                 entries.add(PALE_STRAIRS);
                 entries.add(PALE_SLAB);
+                entries.add(PALE_FENCE);
+                entries.add(PALE_FENCE_GATE);
             })
             .build();
+    public static final Identifier Pale_FEATURE_ID = Identifier.of("iwie", "pale_tree");
+    public static final PaleTreeFeature Pale_FEATURE = new PaleTreeFeature(PaleFeatureConfig.CODEC);
 
     @Override
     public void onInitialize() {
@@ -58,6 +68,9 @@ public class Init implements ModInitializer {
         LOGGER.info("Initializing items and blocks from 1.22 update!");
 
         Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
+
+
+        Registry.register(Registries.FEATURE, Pale_FEATURE_ID, Pale_FEATURE);
 
 
         ModRegistry.registerBlocks();

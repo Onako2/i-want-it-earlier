@@ -16,6 +16,8 @@ public class ModRegistry {
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_planks"), new BlockItem(Init.PALE_PLANKS, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_stairs"), new BlockItem(Init.PALE_STRAIRS, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_slab"), new BlockItem(Init.PALE_SLAB, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_fence"), new BlockItem(Init.PALE_FENCE, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_fence_gate"), new BlockItem(Init.PALE_FENCE_GATE, new Item.Settings()));
     }
 
     public static void registerBlocks() {
@@ -27,5 +29,7 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_planks"), Init.PALE_PLANKS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_stairs"), Init.PALE_STRAIRS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_slab"), Init.PALE_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_fence"), Init.PALE_FENCE);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_fence_gate"), Init.PALE_FENCE_GATE);
     }
 }
