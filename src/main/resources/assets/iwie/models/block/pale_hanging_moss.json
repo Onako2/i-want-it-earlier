@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "iwie:block/pale_hanging_moss"
+  }
+}

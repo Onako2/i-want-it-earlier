@@ -14,7 +14,7 @@
     "surface": "floor",
     "vegetation_chance": 0.6,
     "vegetation_feature": {
-      "feature": "minecraft:moss_vegetation",
+      "feature": "iwie:pale_moss_vegetation",
       "placement": []
     },
     "vertical_range": 5,

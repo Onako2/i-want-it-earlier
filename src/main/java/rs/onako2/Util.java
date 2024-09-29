@@ -10,8 +10,6 @@ import net.minecraft.util.math.Direction;
 
 public class Util {
     public static Block createLogBlock(MapColor topMapColor, MapColor sideMapColor) {
-        return new PillarBlock(AbstractBlock.Settings.create().mapColor((state) -> {
-            return state.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor;
-        }).instrument(NoteBlockInstrument.BASS).strength(2.0F).sounds(BlockSoundGroup.WOOD).burnable());
+        return new PillarBlock(AbstractBlock.Settings.create().mapColor((state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor).instrument(NoteBlockInstrument.BASS).strength(2.0F).sounds(BlockSoundGroup.WOOD).burnable());
     }
 }

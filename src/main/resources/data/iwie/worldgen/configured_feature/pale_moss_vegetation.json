@@ -30,6 +30,12 @@
         },
         {
           "data": {
+            "Name": "iwie:pale_short_grass"
+          },
+          "weight": 50
+        },
+        {
+          "data": {
             "Name": "minecraft:tall_grass",
             "Properties": {
               "half": "lower"

@@ -1,17 +1,13 @@
 {
   "replace": false,
   "values": [
-    "iwie:pale_log",
-    "iwie:pale_planks",
-    "iwie:pale_stairs",
-    "iwie:pale_slab",
-    "iwie:pale_fence",
-    "iwie:pale_fence_gate",
-    "iwie:pale_door",
-    "iwie:pale_trapdoor",
-    "iwie:pale_button",
-    "iwie:pale_pressure_plate",
-    "iwie:pale_sign",
-    "iwie:pale_wall_sign"
+    "iwie:pale_oak_log",
+    "iwie:pale_oak_planks",
+    "iwie:pale_oak_stairs",
+    "iwie:pale_oak_slab",
+    "iwie:pale_oak_fence",
+    "iwie:pale_oak_fence_gate",
+    "iwie:pale_oak_button",
+    "iwie:pale_oak_pressure_plate"
   ]
 }

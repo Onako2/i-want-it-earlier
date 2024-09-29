@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "iwie:block/pale_leaves"
-  }
-}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "iwie:block/pale_oak_slab"
+    },
+    "type=double": {
+      "model": "iwie:block/pale_oak_planks"
+    },
+    "type=top": {
+      "model": "iwie:block/pale_oak_slab_top"
+    }
+  }
+}

@@ -7,12 +7,17 @@ import net.minecraft.sound.SoundEvent;
 
 import java.util.Map;
 
-public record ModBlockSetType(String name, boolean canOpenByHand, boolean canOpenByWindCharge, boolean canButtonBeActivatedByArrows, BlockSetType.ActivationRule pressurePlateSensitivity, BlockSoundGroup soundType, SoundEvent doorClose, SoundEvent doorOpen, SoundEvent trapdoorClose, SoundEvent trapdoorOpen, SoundEvent pressurePlateClickOff, SoundEvent pressurePlateClickOn, SoundEvent buttonClickOff, SoundEvent buttonClickOn) {
-    private static final Map<String, ModBlockSetType> VALUES = new Object2ObjectArrayMap();
+public record ModBlockSetType(String name, boolean canOpenByHand, boolean canOpenByWindCharge,
+                              boolean canButtonBeActivatedByArrows,
+                              BlockSetType.ActivationRule pressurePlateSensitivity, BlockSoundGroup soundType,
+                              SoundEvent doorClose, SoundEvent doorOpen, SoundEvent trapdoorClose,
+                              SoundEvent trapdoorOpen, SoundEvent pressurePlateClickOff,
+                              SoundEvent pressurePlateClickOn, SoundEvent buttonClickOff, SoundEvent buttonClickOn) {
     public static final BlockSetType PALE;
+    private static final Map<String, ModBlockSetType> VALUES = new Object2ObjectArrayMap();
 
     static {
-        PALE = register(new BlockSetType("pale"));
+        PALE = register(new BlockSetType("pale_oak"));
     }
 
 
