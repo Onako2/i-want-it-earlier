@@ -14,12 +14,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.onako2.block.PaleMossBlock;
 import rs.onako2.block.PaleRootsBlock;
 import rs.onako2.block.PaleRootsPlantBlock;
 import rs.onako2.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingConfig;
 import rs.onako2.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingFeature;
 import rs.onako2.feature.pale_moss_feature.PaleMossPatchConfig;
 import rs.onako2.feature.pale_moss_feature.PaleMossPatchFeature;
+import rs.onako2.feature.pale_moss_patch_bonemeal.PaleMossPatchBonemealConfig;
+import rs.onako2.feature.pale_moss_patch_bonemeal.PaleMossPatchBonemealFeature;
 import rs.onako2.feature.pale_short_grass_feature.PaleShortGrassFeature;
 import rs.onako2.feature.pale_short_grass_feature.PaleShortGrassPatchConfig;
 import rs.onako2.feature.paletree.PaleFeatureConfig;
@@ -38,7 +41,7 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_SHORT_GRASS = new ShortPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
 
-    public static final Block PALE_MOSS_BLOCK = new MossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_MOSS_BLOCK = new PaleMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
 
     public static final Block PALE_MOSS_CARPET = new CarpetBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
 
@@ -78,6 +81,10 @@ public class Init implements ModInitializer {
 
     public static final PaleShortGrassFeature PALE_SHORT_GRASS_FEATURE = new PaleShortGrassFeature(PaleShortGrassPatchConfig.CODEC);
 
+    public static final Identifier PALE_MOSS_PATCH_BONEMEAL_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch_bonemeal");
+
+    public static final PaleMossPatchBonemealFeature PALE_MOSS_PATCH_BONEMEAL_FEATURE = new PaleMossPatchBonemealFeature(PaleMossPatchBonemealConfig.CODEC);
+
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
@@ -114,6 +121,8 @@ public class Init implements ModInitializer {
         Registry.register(Registries.FEATURE, PALE_MOSS_PATCH_CEILING_FEATURE_ID, PALE_MOSS_PATCH_CEILING_FEATURE);
 
         Registry.register(Registries.FEATURE, PALE_SHORT_GRASS_PATCH_FEATURE_ID, PALE_SHORT_GRASS_FEATURE);
+
+        Registry.register(Registries.FEATURE, PALE_MOSS_PATCH_BONEMEAL_FEATURE_ID, PALE_MOSS_PATCH_BONEMEAL_FEATURE);
 
         ModRegistry.registerBlocks();
         ModRegistry.registerItems();
