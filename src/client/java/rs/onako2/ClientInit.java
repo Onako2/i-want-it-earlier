@@ -8,5 +8,7 @@ public class ClientInit implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_SHORT_GRASS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_MOSS_CARPET, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_SAPLING, RenderLayer.getCutout());
     }
 }

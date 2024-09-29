@@ -41,8 +41,14 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_FENCE_GATE = new FenceGateBlock(WoodType.OAK, AbstractBlock.Settings.create().mapColor(PALE_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).burnable());
 
+    public static final Block PALE_SAPLING = new SaplingBlock(PaleSapling.PALE, AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
 
-    //public static final Block PALE_SAPLING = new SaplingBlock(PaleSapling.PALE, AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_LEAVES = new LeavesBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(Blocks::canSpawnOnLeaves).suffocates(Blocks::never).blockVision(Blocks::never).burnable().pistonBehavior(PistonBehavior.DESTROY).solidBlock(Blocks::never));
+
+    public static final Block PALE_BUTTON = new ButtonBlock(ModBlockSetType.PALE, 30,AbstractBlock.Settings.create().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block PALE_PRESSURE_PLATE = new PressurePlateBlock(ModBlockSetType.PALE, AbstractBlock.Settings.create().mapColor(PALE_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).burnable().pistonBehavior(PistonBehavior.DESTROY));
+
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
@@ -57,9 +63,14 @@ public class Init implements ModInitializer {
                 entries.add(PALE_SLAB);
                 entries.add(PALE_FENCE);
                 entries.add(PALE_FENCE_GATE);
+                entries.add(PALE_SAPLING);
+                entries.add(PALE_LEAVES);
+                entries.add(PALE_BUTTON);
+                entries.add(PALE_PRESSURE_PLATE);
             })
             .build();
     public static final Identifier Pale_FEATURE_ID = Identifier.of("iwie", "pale_tree");
+
     public static final PaleTreeFeature Pale_FEATURE = new PaleTreeFeature(PaleFeatureConfig.CODEC);
 
     @Override
