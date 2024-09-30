@@ -8,6 +8,9 @@
     "iwie:pale_oak_fence",
     "iwie:pale_oak_fence_gate",
     "iwie:pale_oak_button",
-    "iwie:pale_oak_pressure_plate"
+    "iwie:pale_oak_pressure_plate",
+    "iwie:pale_oak_wood",
+    "iwie:stripped_pale_oak_log",
+    "iwie:stripped_pale_oak_wood"
   ]
 }

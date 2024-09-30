@@ -15,15 +15,18 @@
     "discord": "https://discord.gg/nFpa776nQk",
     "issues": "https://github.com/Onako2/i-want-it-earlier/issues"
   },
+  "mixins": [
+    "iwie.mixins.json"
+  ],
   "license": "MIT",
   "icon": "assets/iwie/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "rs.onako2.Init"
+      "rs.onako2.iwie.Init"
     ],
     "client": [
-      "rs.onako2.ClientInit"
+      "rs.onako2.iwie.ClientInit"
     ]
   },
   "depends": {

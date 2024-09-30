@@ -1,7 +1,7 @@
 {
   "temperature": 0.7,
   "downfall": 0.8,
-  "has_precipitation": false,
+  "has_precipitation": true,
   "temperature_modifier": "none",
   "effects": {
     "sky_color": 12040119,
@@ -9,7 +9,19 @@
     "water_color": 5001810,
     "water_fog_color": 5001810,
     "grass_color": 7039851,
-    "foliage_color": 65350
+    "foliage_color": 12040119,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "minecraft:music.overworld.forest"
+    }
   },
   "spawners": {
     "misc": [],
@@ -45,7 +57,14 @@
         "maxCount": 4
       }
     ],
-    "underground_water_creature": [],
+    "underground_water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "maxCount": 6,
+        "minCount": 4,
+        "weight": 10
+      }
+    ],
     "water_ambient": [],
     "water_creature": []
   },
@@ -88,6 +107,12 @@
       "minecraft:disk_clay",
       "minecraft:disk_gravel",
       "iwie:pale_moss_patch_ceiling"
+    ],
+    [
+      "iwie:pale_oak_tree"
+    ],
+    [
+      "iwie:pale_oak_tree"
     ],
     [
       "iwie:pale_oak_tree"
