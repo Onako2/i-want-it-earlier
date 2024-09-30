@@ -3,6 +3,7 @@ package rs.onako2.iwie;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -15,9 +16,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.onako2.iwie.block.PaleHangingMossBlock;
+import rs.onako2.iwie.block.PaleHangingMossPlantBlock;
 import rs.onako2.iwie.block.PaleMossBlock;
-import rs.onako2.iwie.block.PaleRootsBlock;
-import rs.onako2.iwie.block.PaleRootsPlantBlock;
+import rs.onako2.iwie.compat.WilderWildCompat;
 import rs.onako2.iwie.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingConfig;
 import rs.onako2.iwie.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingFeature;
 import rs.onako2.iwie.feature.pale_moss_feature.PaleMossPatchConfig;
@@ -70,8 +72,8 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_OAK_PRESSURE_PLATE = new PressurePlateBlock(ModBlockSetType.PALE, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).burnable().pistonBehavior(PistonBehavior.DESTROY));
 
-    public static final Block PALE_HANGING_MOSS = new PaleRootsBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
-    public static final Block PALE_HANGING_MOSS_PLANT = new PaleRootsPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_HANGING_MOSS_PLANT = new PaleHangingMossPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Identifier PALE_TREE_FEATURE_ID = Identifier.of("iwie", "pale_oak_tree");
     public static final PaleTreeFeature PALE_FEATURE = new PaleTreeFeature(PaleFeatureConfig.CODEC);
     public static final Identifier PALE_MOSS_PATCH_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch");
@@ -107,6 +109,7 @@ public class Init implements ModInitializer {
                 entries.add(STRIPPED_PALE_OAK_WOOD);
             })
             .build();
+
     @Override
     public void onInitialize() {
 
@@ -127,6 +130,12 @@ public class Init implements ModInitializer {
         ModRegistry.registerBlocks();
         ModRegistry.registerItems();
         ModRegistry.registerFuel();
+
+        // check if Fabric API is present
+        if (FabricLoader.getInstance().isModLoaded("wilderwild")) {
+            LOGGER.info("Wilder Wild mod is present, initializing compatibility features!");
+            WilderWildCompat.init();
+        }
 
         StrippableBlockRegistry.register(PALE_OAK_LOG, STRIPPED_PALE_OAK_LOG);
         StrippableBlockRegistry.register(PALE_OAK_WOOD, STRIPPED_PALE_OAK_WOOD);
