@@ -2,13 +2,23 @@ package rs.onako2.iwie;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.util.Identifier;
+import rs.onako2.iwie.entity.CreakingEntityRenderer;
+import rs.onako2.iwie.entity.CreakingModel;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ClientInit implements ClientModInitializer {
+
+    public static final EntityModelLayer MODEL_CREAKING_LAYER = new EntityModelLayer(Identifier.of("iwie", "creaking"), "main");
+
+
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_SHORT_GRASS, RenderLayer.getCutout());
@@ -35,6 +45,12 @@ public class ClientInit implements ClientModInitializer {
 
             client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
         });
+
+        EntityRendererRegistry.INSTANCE.register(Init.CREAKING, (context) -> {
+            return new CreakingEntityRenderer(context);
+        });
+
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CREAKING_LAYER, CreakingModel::getTexturedModelData);
 
     }
 }

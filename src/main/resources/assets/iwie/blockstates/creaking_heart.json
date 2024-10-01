@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "activated=true": {
+      "model": "iwie:block/creaking_heart_on"
+    },
+    "activated=false": {
+      "model": "iwie:block/creaking_heart_off"
+    }
+  }
+}

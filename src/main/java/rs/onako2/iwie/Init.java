@@ -2,40 +2,60 @@ package rs.onako2.iwie;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.onako2.iwie.block.CreakingHeartBlock;
 import rs.onako2.iwie.block.PaleHangingMossBlock;
 import rs.onako2.iwie.block.PaleHangingMossPlantBlock;
 import rs.onako2.iwie.block.PaleMossBlock;
 import rs.onako2.iwie.compat.WilderWildCompat;
+import rs.onako2.iwie.decorator.CreakingHeartDecorator;
+import rs.onako2.iwie.entity.CreakingBlockEntityTypes;
+import rs.onako2.iwie.entity.CreakingEntity;
 import rs.onako2.iwie.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingConfig;
 import rs.onako2.iwie.feature.pale_moss_ceiling_feature.PaleMossPatchCeilingFeature;
 import rs.onako2.iwie.feature.pale_moss_feature.PaleMossPatchConfig;
 import rs.onako2.iwie.feature.pale_moss_feature.PaleMossPatchFeature;
 import rs.onako2.iwie.feature.pale_moss_patch_bonemeal.PaleMossPatchBonemealConfig;
 import rs.onako2.iwie.feature.pale_moss_patch_bonemeal.PaleMossPatchBonemealFeature;
+import rs.onako2.iwie.feature.pale_oak_tree.PaleOakSapling;
+import rs.onako2.iwie.feature.pale_oak_tree.PaleOakTreeFeature;
+import rs.onako2.iwie.feature.pale_oak_tree.PaleOakTreeFeatureConfig;
 import rs.onako2.iwie.feature.pale_short_grass_feature.PaleShortGrassFeature;
 import rs.onako2.iwie.feature.pale_short_grass_feature.PaleShortGrassPatchConfig;
-import rs.onako2.iwie.feature.paletree.PaleFeatureConfig;
-import rs.onako2.iwie.feature.paletree.PaleSapling;
-import rs.onako2.iwie.feature.paletree.PaleTreeFeature;
 
 public class Init implements ModInitializer {
     // This logger is used to write text to the console and the log file.
     // It is considered best practice to use your mod id as the logger's name.
     // That way, it's clear which mod wrote info, warnings, and errors.
+
+    public static final EntityType<CreakingEntity> CREAKING = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of("iwie", "creaking"),
+            EntityType.Builder.create(CreakingEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(1.0f, 2.9f)
+                    .build()
+    );
+
+
     public static final Logger LOGGER = LoggerFactory.getLogger("iwie");
 
     public static final Block TEST = new Block(AbstractBlock.Settings.create().strength(4.0f));
@@ -64,7 +84,7 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_OAK_FENCE_GATE = new FenceGateBlock(WoodType.OAK, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).burnable());
 
-    public static final Block PALE_OAK_SAPLING = new SaplingBlock(PaleSapling.PALE, AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_OAK_SAPLING = new SaplingBlock(PaleOakSapling.PALE, AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY));
 
     public static final Block PALE_OAK_LEAVES = new LeavesBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(Blocks::canSpawnOnLeaves).suffocates(Blocks::never).blockVision(Blocks::never).burnable().pistonBehavior(PistonBehavior.DESTROY).solidBlock(Blocks::never));
 
@@ -72,10 +92,14 @@ public class Init implements ModInitializer {
 
     public static final Block PALE_OAK_PRESSURE_PLATE = new PressurePlateBlock(ModBlockSetType.PALE, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).burnable().pistonBehavior(PistonBehavior.DESTROY));
 
+    public static final Block CREAKING_HEART = new CreakingHeartBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(2.1F).sounds(BlockSoundGroup.MOSS_BLOCK));
+
+    public static final Item CREAKING_SPAWN_EGG = new SpawnEggItem(CREAKING, 0xc4c4c4, 0xadadad, new Item.Settings());
+
     public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Block PALE_HANGING_MOSS_PLANT = new PaleHangingMossPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
-    public static final Identifier PALE_TREE_FEATURE_ID = Identifier.of("iwie", "pale_oak_tree");
-    public static final PaleTreeFeature PALE_FEATURE = new PaleTreeFeature(PaleFeatureConfig.CODEC);
+    public static final Identifier PALE_OAK_TREE_FEATURE_ID = Identifier.of("iwie", "pale_oak_tree");
+    public static final PaleOakTreeFeature PALE_FEATURE = new PaleOakTreeFeature(PaleOakTreeFeatureConfig.CODEC);
     public static final Identifier PALE_MOSS_PATCH_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch");
     public static final PaleMossPatchFeature PALE_MOSS_PATCH_FEATURE = new PaleMossPatchFeature(PaleMossPatchConfig.CODEC);
     public static final Identifier PALE_MOSS_PATCH_CEILING_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch_ceiling");
@@ -84,6 +108,8 @@ public class Init implements ModInitializer {
     public static final PaleShortGrassFeature PALE_SHORT_GRASS_FEATURE = new PaleShortGrassFeature(PaleShortGrassPatchConfig.CODEC);
     public static final Identifier PALE_MOSS_PATCH_BONEMEAL_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch_bonemeal");
     public static final PaleMossPatchBonemealFeature PALE_MOSS_PATCH_BONEMEAL_FEATURE = new PaleMossPatchBonemealFeature(PaleMossPatchBonemealConfig.CODEC);
+    public static final TreeDecoratorType<CreakingHeartDecorator> CREAKING_HEART_DECORATOR_TREE_DECORATOR_TYPE = new TreeDecoratorType<>(CreakingHeartDecorator.CODEC);
+
 
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
@@ -107,6 +133,8 @@ public class Init implements ModInitializer {
                 entries.add(STRIPPED_PALE_OAK_LOG);
                 entries.add(PALE_OAK_WOOD);
                 entries.add(STRIPPED_PALE_OAK_WOOD);
+                entries.add(CREAKING_SPAWN_EGG);
+                entries.add(CREAKING_HEART);
             })
             .build();
 
@@ -117,7 +145,7 @@ public class Init implements ModInitializer {
 
         Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
 
-        Registry.register(Registries.FEATURE, PALE_TREE_FEATURE_ID, PALE_FEATURE);
+        Registry.register(Registries.FEATURE, PALE_OAK_TREE_FEATURE_ID, PALE_FEATURE);
 
         Registry.register(Registries.FEATURE, PALE_MOSS_PATCH_FEATURE_ID, PALE_MOSS_PATCH_FEATURE);
 
@@ -127,9 +155,14 @@ public class Init implements ModInitializer {
 
         Registry.register(Registries.FEATURE, PALE_MOSS_PATCH_BONEMEAL_FEATURE_ID, PALE_MOSS_PATCH_BONEMEAL_FEATURE);
 
+        Registry.register(Registries.TREE_DECORATOR_TYPE, Identifier.of("iwie", "creaking_heart"), CREAKING_HEART_DECORATOR_TREE_DECORATOR_TYPE);
+        CreakingBlockEntityTypes.initialize();
+
         ModRegistry.registerBlocks();
         ModRegistry.registerItems();
         ModRegistry.registerFuel();
+
+        FabricDefaultAttributeRegistry.register(CREAKING, CreakingEntity.createMobAttributes());
 
         // check if Fabric API is present
         if (FabricLoader.getInstance().isModLoaded("wilderwild")) {

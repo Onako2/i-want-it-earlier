@@ -48,8 +48,6 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    compileOnly "maven.modrinth:wilder-wild:2.4.16-mc1.21.1"
-
 }
 
 processResources {

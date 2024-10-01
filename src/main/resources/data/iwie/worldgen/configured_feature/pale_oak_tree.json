@@ -10,7 +10,7 @@
           "source": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "iwie:pale_hanging_moss_plant"
+              "Name": "iwie:pale_hanging_moss"
             }
           },
           "values": {
@@ -26,6 +26,10 @@
         "exclusion_radius_y": 0,
         "probability": 0.14,
         "required_empty_blocks": 2
+      },
+      {
+        "type": "iwie:creaking_heart",
+        "probability": 0.1
       }
     ],
     "dirt_provider": {
