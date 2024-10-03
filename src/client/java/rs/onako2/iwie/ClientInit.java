@@ -2,8 +2,8 @@ package rs.onako2.iwie;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.RenderLayer;
@@ -46,9 +46,7 @@ public class ClientInit implements ClientModInitializer {
             client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
         });
 
-        EntityRendererRegistry.INSTANCE.register(Init.CREAKING, (context) -> {
-            return new CreakingEntityRenderer(context);
-        });
+        EntityRendererRegistry.register(Init.CREAKING, CreakingEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(MODEL_CREAKING_LAYER, CreakingModel::getTexturedModelData);
 
