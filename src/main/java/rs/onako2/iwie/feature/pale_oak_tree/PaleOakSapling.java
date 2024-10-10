@@ -15,6 +15,5 @@ public class PaleOakSapling {
 
     static {
         PALE = new SaplingGenerator("pale_tree", Optional.of(PALE_REGISTRY), Optional.empty(), Optional.empty());
-
     }
 }

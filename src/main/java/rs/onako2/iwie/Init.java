@@ -52,7 +52,7 @@ public class Init implements ModInitializer {
             Identifier.of("iwie", "creaking"),
             EntityType.Builder.create(CreakingEntity::new, SpawnGroup.MONSTER)
                     .dimensions(1.0f, 2.9f)
-                    .build()
+                    .build(null)
     );
 
 

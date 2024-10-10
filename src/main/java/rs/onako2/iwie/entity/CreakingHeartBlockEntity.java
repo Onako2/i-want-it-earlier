@@ -3,6 +3,9 @@ package rs.onako2.iwie.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -23,8 +26,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
     private void checkAndSpawnCreaking(World world, BlockPos pos) {
         boolean creakingExists = !world.getEntitiesByClass(CreakingEntity.class, new Box(pos).expand(32), entity -> true).isEmpty();
-        if (!creakingExists) {
+        if (!creakingExists && world.isNight()) {
             CreakingEntity creaking = new CreakingEntity(Init.CREAKING, world);
+            creaking.isHeartSpawn = true;
 
             // get nearest air block
             for (int x = -2; x <= 2; x++) {

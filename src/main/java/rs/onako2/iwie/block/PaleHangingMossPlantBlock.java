@@ -11,7 +11,7 @@ public class PaleHangingMossPlantBlock extends AbstractPlantBlock {
     public static final MapCodec<WeepingVinesPlantBlock> CODEC = createCodec(WeepingVinesPlantBlock::new);
     public static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public PaleHangingMossPlantBlock(AbstractBlock.Settings settings) {
+    public PaleHangingMossPlantBlock(Settings settings) {
         super(settings, Direction.DOWN, SHAPE, false);
     }
 

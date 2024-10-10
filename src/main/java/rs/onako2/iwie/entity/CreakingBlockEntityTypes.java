@@ -16,7 +16,7 @@ public class CreakingBlockEntityTypes {
     static {
         CREAKING_HEART_BLOCK = register(
                 "creaking_heart",
-                BlockEntityType.Builder.create((pos, state) -> new CreakingHeartBlockEntity(CREAKING_HEART_BLOCK, pos, state), Init.CREAKING_HEART).build()
+                BlockEntityType.Builder.create((pos, state) -> new CreakingHeartBlockEntity(CREAKING_HEART_BLOCK, pos, state), Init.CREAKING_HEART).build(null)
         );
     }
 

@@ -43,7 +43,7 @@ public class ClientInit implements ClientModInitializer {
             BlockColors blockColors = client.getBlockColors();
             blockColors.registerColorProvider(new PaleLeavesColorProvider(), Init.PALE_OAK_LEAVES);
 
-            client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+            //client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
         });
 
         EntityRendererRegistry.register(Init.CREAKING, CreakingEntityRenderer::new);
