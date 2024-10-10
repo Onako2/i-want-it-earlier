@@ -13,6 +13,8 @@ import rs.onako2.iwie.Init;
 import rs.onako2.iwie.block.CreakingHeartBlock;
 
 public class CreakingHeartBlockEntity extends BlockEntity {
+    public CreakingEntity creakingEntity = null;
+
     public CreakingHeartBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -25,10 +27,14 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     }
 
     private void checkAndSpawnCreaking(World world, BlockPos pos) {
-        boolean creakingExists = !world.getEntitiesByClass(CreakingEntity.class, new Box(pos).expand(32), entity -> true).isEmpty();
-        if (!creakingExists && world.isNight()) {
+        //boolean creakingExists = !world.getEntitiesByClass(CreakingEntity.class, new Box(pos).expand(32), entity -> true).isEmpty();
+        boolean creakingExists = this.creakingEntity != null;
+        //System.out.println(creakingExists);
+        if (!creakingExists && (world.isNight())) {
             CreakingEntity creaking = new CreakingEntity(Init.CREAKING, world);
+            creaking.boundHeart = this.getPos();
             creaking.isHeartSpawn = true;
+            this.creakingEntity = creaking;
 
             // get nearest air block
             for (int x = -2; x <= 2; x++) {
