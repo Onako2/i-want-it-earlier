@@ -1,5 +1,6 @@
 package rs.onako2.iwie.entity;
 
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -12,13 +13,15 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import rs.onako2.iwie.Init;
 import rs.onako2.iwie.Util;
 import rs.onako2.iwie.entity.ai.goal.CreakingMeleeAttackGoal;
 
@@ -27,6 +30,7 @@ public class CreakingEntity extends HostileEntity {
 
     public boolean isHeartSpawn = false;
     public boolean deathLock = false;
+    public BlockPos boundHeart;
 
     public CreakingEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -41,34 +45,69 @@ public class CreakingEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
     }
 
+    public boolean isHeartNear() {
+        if (this.boundHeart != null && this.getWorld().getBlockState(this.boundHeart).getBlock() == Init.CREAKING_HEART) {
+            Vec3d entityPos = this.getPos();
+            Vec3d heartPos = new Vec3d(this.boundHeart.getX(), this.boundHeart.getY(), this.boundHeart.getZ());
+            double distance = entityPos.distanceTo(heartPos);
+
+            if (distance <= 34.0) {
+                var blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
+                if(blockEntity instanceof CreakingHeartBlockEntity) {
+                    ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
         if(this.getWorld().isClient()) {
             return;
         }
-        if(this.isHeartSpawn && this.getWorld().isDay() || (this.isHeartSpawn && !Util.isHeartNear(this, this.getWorld(), 16))) {
+        boolean isHeartNear = false;
+        isHeartNear = this.isHeartNear();
+
+        if (this.isHeartSpawn && this.getWorld().isDay() && !this.getWorld().isThundering() || (this.isHeartSpawn && !isHeartNear)) {
             this.deathLock = true;
             this.kill();
         }
     }
+
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(IS_HEART_SPAWN,false);
+        builder.add(IS_HEART_SPAWN, false);
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("is_heart_spawn", this.isHeartSpawn);
+
+        if (this.boundHeart != null) {
+            NbtCompound heartNbt = new NbtCompound();
+            heartNbt.putInt("x", this.boundHeart.getX());
+            heartNbt.putInt("y", this.boundHeart.getY());
+            heartNbt.putInt("z", this.boundHeart.getZ());
+            nbt.put("bound_heart", heartNbt);
+        }
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        if (nbt.contains("is_heart_spawn", NbtElement.BYTE_TYPE)) {
-            this.isHeartSpawn = nbt.getBoolean("is_heart_spawn");
+        this.isHeartSpawn = nbt.getBoolean("is_heart_spawn");
+
+        if (nbt.contains("bound_heart", NbtElement.COMPOUND_TYPE)) {
+            NbtCompound heartNbt = nbt.getCompound("bound_heart");
+            this.boundHeart = new BlockPos(heartNbt.getInt("x"), heartNbt.getInt("y"), heartNbt.getInt("z"));
         }
     }
 
@@ -81,17 +120,27 @@ public class CreakingEntity extends HostileEntity {
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
-        if(this.isHeartSpawn && !this.deathLock) {
-            return false;
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        if(this.boundHeart != null) {
+            BlockEntity blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
+            if (blockEntity instanceof CreakingHeartBlockEntity) {
+                ((CreakingHeartBlockEntity) blockEntity).creakingEntity = null;
+            }
         }
-
-        if (!Util.isHeartNear(this, this.getWorld(), 16)) {
-            return super.damage(source, amount);
-        }
-
-        return false;
     }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if(this.isHeartSpawn && this.isHeartNear()) {
+            if (this.getWorld().isNight() || this.getWorld().isThundering()) {
+                return false;
+            }
+        }
+
+        return super.damage(source, amount);
+    }
+
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_SKELETON_AMBIENT;
