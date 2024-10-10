@@ -1,0 +1,83 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [
+      {
+        "type": "minecraft:attached_to_leaves",
+        "block_provider": {
+          "type": "minecraft:randomized_int_state_provider",
+          "property": "age",
+          "source": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "iwie:pale_hanging_moss"
+            }
+          },
+          "values": {
+            "type": "minecraft:uniform",
+            "max_inclusive": 4,
+            "min_inclusive": 0
+          }
+        },
+        "directions": [
+          "down"
+        ],
+        "exclusion_radius_xz": 1,
+        "exclusion_radius_y": 0,
+        "probability": 0.14,
+        "required_empty_blocks": 2
+      },
+      {
+        "type": "iwie:creaking_heart",
+        "probability": 0.1
+      }
+    ],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "minecraft:dark_oak_foliage_placer",
+      "offset": 0,
+      "radius": 0
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "iwie:pale_oak_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "force_dirt": false,
+    "ignore_vines": true,
+    "minimum_size": {
+      "type": "minecraft:three_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "middle_size": 1,
+      "upper_limit": 1,
+      "upper_size": 2
+    },
+    "trunk_placer": {
+      "type": "minecraft:dark_oak_trunk_placer",
+      "base_height": 5,
+      "height_rand_a": 2,
+      "height_rand_b": 1
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "iwie:pale_oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}
