@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import rs.onako2.iwie.Init;
 import rs.onako2.iwie.entity.CreakingBlockEntityTypes;
-import rs.onako2.iwie.entity.CreakingEntity;
 import rs.onako2.iwie.entity.CreakingHeartBlockEntity;
 
 public class CreakingHeartBlock extends BlockWithEntity {

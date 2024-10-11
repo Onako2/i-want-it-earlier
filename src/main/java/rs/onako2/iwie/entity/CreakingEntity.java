@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import rs.onako2.iwie.Init;
-import rs.onako2.iwie.Util;
 import rs.onako2.iwie.entity.ai.goal.CreakingMeleeAttackGoal;
 
 public class CreakingEntity extends HostileEntity {
@@ -42,7 +41,7 @@ public class CreakingEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0);
     }
 
     public boolean isHeartNear() {
@@ -53,7 +52,7 @@ public class CreakingEntity extends HostileEntity {
 
             if (distance <= 34.0) {
                 var blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
-                if(blockEntity instanceof CreakingHeartBlockEntity) {
+                if (blockEntity instanceof CreakingHeartBlockEntity) {
                     ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
                 }
                 return true;
@@ -68,7 +67,7 @@ public class CreakingEntity extends HostileEntity {
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if (this.getWorld().isClient()) {
             return;
         }
         boolean isHeartNear = false;
@@ -122,7 +121,7 @@ public class CreakingEntity extends HostileEntity {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if(this.boundHeart != null) {
+        if (this.boundHeart != null) {
             BlockEntity blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
             if (blockEntity instanceof CreakingHeartBlockEntity) {
                 ((CreakingHeartBlockEntity) blockEntity).creakingEntity = null;
@@ -132,7 +131,7 @@ public class CreakingEntity extends HostileEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if(this.isHeartSpawn && this.isHeartNear()) {
+        if (this.isHeartSpawn && this.isHeartNear()) {
             if (this.getWorld().isNight() || this.getWorld().isThundering()) {
                 return false;
             }

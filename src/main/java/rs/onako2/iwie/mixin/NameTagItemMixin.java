@@ -22,7 +22,7 @@ public abstract class NameTagItemMixin extends Item {
 
     @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
     public void useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if(entity instanceof CreakingEntity) {
+        if (entity instanceof CreakingEntity) {
             cir.setReturnValue(ActionResult.PASS);
         }
     }
