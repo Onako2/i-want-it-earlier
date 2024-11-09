@@ -44,9 +44,9 @@ public class ClientInit implements ClientModInitializer {
             BlockColors blockColors = client.getBlockColors();
             blockColors.registerColorProvider(new PaleLeavesColorProvider(), Init.PALE_OAK_LEAVES);
 
-            /*if (SystemUtils.IS_OS_WINDOWS) {
-                client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
-            }*/
+            if (SystemUtils.IS_OS_WINDOWS) {
+                client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");	                client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+            }
 
         });
 

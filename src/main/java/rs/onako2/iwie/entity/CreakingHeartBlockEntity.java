@@ -40,12 +40,12 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     public BlockPos findAirBlockPos() {
         BlockPos basePos = this.getPos();
         int[][] offsets = {
-                { 1, 0, 0 },  // 前
-                { -1, 0, 0 }, // 后
-                { 0, 1, 0 },  // 上
-                { 0, -1, 0 }, // 下
-                { 0, 0, 1 },  // 右
-                { 0, 0, -1 }  // 左
+                { 1, 0, 0 },  // Front
+                { -1, 0, 0 }, // Behind
+                { 0, 1, 0 },  // Top
+                { 0, -1, 0 }, // Bottom
+                { 0, 0, 1 },  // Right
+                { 0, 0, -1 }  // Left
         };
 
         for (int[] offset : offsets) {
