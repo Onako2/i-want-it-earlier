@@ -1,7 +1,10 @@
 package rs.onako2.iwie.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractPlantBlock;
+import net.minecraft.block.AbstractPlantStemBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.WeepingVinesPlantBlock;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import rs.onako2.iwie.Init;

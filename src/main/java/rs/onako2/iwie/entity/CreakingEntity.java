@@ -44,8 +44,8 @@ public class CreakingEntity extends HostileEntity {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.5);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0);
     }
 
     public boolean isHeartNear() {
@@ -56,7 +56,7 @@ public class CreakingEntity extends HostileEntity {
 
             if (distance <= 34.0) {
                 var blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
-                if(blockEntity instanceof CreakingHeartBlockEntity) {
+                if (blockEntity instanceof CreakingHeartBlockEntity) {
                     ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
                 }
                 return true;
@@ -71,11 +71,11 @@ public class CreakingEntity extends HostileEntity {
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if (this.getWorld().isClient()) {
             return;
         }
         BlockEntity blockEntity = this.getWorld().getBlockEntity(this.getBlockPos());
-        if(blockEntity != null) {
+        if (blockEntity != null) {
             ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
         }
         boolean isHeartNear = false;
@@ -129,7 +129,7 @@ public class CreakingEntity extends HostileEntity {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if(this.boundHeart != null) {
+        if (this.boundHeart != null) {
             BlockEntity blockEntity = this.getWorld().getBlockEntity(this.boundHeart);
             if (blockEntity instanceof CreakingHeartBlockEntity) {
                 ((CreakingHeartBlockEntity) blockEntity).creakingEntity = null;
@@ -139,7 +139,7 @@ public class CreakingEntity extends HostileEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if(this.isHeartSpawn && this.isHeartNear()) {
+        if (this.isHeartSpawn && this.isHeartNear()) {
             if (this.getWorld().isNight() || this.getWorld().isThundering()) {
                 BlockState blockState = this.getWorld().getBlockState(boundHeart);
                 BlockEntity blockEntity = this.getWorld().getBlockEntity(boundHeart);
