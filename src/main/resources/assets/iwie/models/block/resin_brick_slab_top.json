@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "iwie:block/resin_bricks",
+    "side": "iwie:block/resin_bricks",
+    "top": "iwie:block/resin_bricks"
+  }
+}

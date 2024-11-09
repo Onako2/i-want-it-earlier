@@ -58,7 +58,7 @@ public class Init implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger("iwie");
 
-    public static final Block TEST = new Block(AbstractBlock.Settings.create().strength(4.0f));
+    //public static final Block TEST = new Block(AbstractBlock.Settings.create().strength(4.0f));
 
     public static final Block PALE_OAK_LOG = Util.createLogBlock(MapColor.PALE_YELLOW, MapColor.GRAY);
 
@@ -96,6 +96,16 @@ public class Init implements ModInitializer {
 
     public static final Item CREAKING_SPAWN_EGG = new SpawnEggItem(CREAKING, 0xc4c4c4, 0xadadad, new Item.Settings());
 
+    public static final Block RESIN_BLOCK = new Block(AbstractBlock.Settings.create().hardness(0));
+    public static final Block RESIN_BRICKS = new Block(AbstractBlock.Settings.create().hardness(1.5f));
+    public static final Block CHISELED_RESIN_BRICK = new Block(AbstractBlock.Settings.create().hardness(1.5f));
+    public static final Block RESIN_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
+    public static final Block RESIN_BRICK_STAIRS = new StairsBlock(RESIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
+    public static final Block RESIN_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).solid().hardness(1.5f));
+
+    public static final Item RESIN_CLUMP = new Item(new Item.Settings());
+    public static final Item RESIN_BRICK = new Item(new Item.Settings());
+
     public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Block PALE_HANGING_MOSS_PLANT = new PaleHangingMossPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Identifier PALE_OAK_TREE_FEATURE_ID = Identifier.of("iwie", "pale_oak_tree");
@@ -112,10 +122,10 @@ public class Init implements ModInitializer {
 
 
     private static final ItemGroup IWIE = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(TEST))
+            .icon(() -> new ItemStack(PALE_OAK_LOG))
             .displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
-                entries.add(TEST);
+                //entries.add(TEST);
                 entries.add(PALE_OAK_LOG);
                 entries.add(PALE_SHORT_GRASS);
                 entries.add(PALE_MOSS_BLOCK);
@@ -135,6 +145,13 @@ public class Init implements ModInitializer {
                 entries.add(STRIPPED_PALE_OAK_WOOD);
                 entries.add(CREAKING_SPAWN_EGG);
                 entries.add(CREAKING_HEART);
+                entries.add(RESIN_BLOCK);
+                entries.add(RESIN_BRICKS);
+                entries.add(RESIN_BRICK_SLAB);
+                entries.add(RESIN_BRICK_STAIRS);
+                entries.add(RESIN_BRICK_WALL);
+                entries.add(RESIN_CLUMP);
+                entries.add(RESIN_BRICK);
             })
             .build();
 

@@ -1,5 +1,7 @@
 package rs.onako2.iwie.entity;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import rs.onako2.iwie.Init;
 import rs.onako2.iwie.Util;
+import rs.onako2.iwie.block.CreakingHeartBlock;
 import rs.onako2.iwie.entity.ai.goal.CreakingMeleeAttackGoal;
 
 public class CreakingEntity extends HostileEntity {
@@ -34,15 +37,15 @@ public class CreakingEntity extends HostileEntity {
 
     public CreakingEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);;
     }
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.5);
     }
 
     public boolean isHeartNear() {
@@ -70,6 +73,10 @@ public class CreakingEntity extends HostileEntity {
         super.tick();
         if(this.getWorld().isClient()) {
             return;
+        }
+        BlockEntity blockEntity = this.getWorld().getBlockEntity(this.getBlockPos());
+        if(blockEntity != null) {
+            ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
         }
         boolean isHeartNear = false;
         isHeartNear = this.isHeartNear();
@@ -115,7 +122,7 @@ public class CreakingEntity extends HostileEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new CreakingMeleeAttackGoal(this, 1.0, true));
         this.goalSelector.add(2, new WanderAroundGoal(this, 0.7));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
         this.targetSelector.add(0, new ActiveTargetGoal<>(this, PlayerEntity.class, false));
     }
 
@@ -134,6 +141,12 @@ public class CreakingEntity extends HostileEntity {
     public boolean damage(DamageSource source, float amount) {
         if(this.isHeartSpawn && this.isHeartNear()) {
             if (this.getWorld().isNight() || this.getWorld().isThundering()) {
+                BlockState blockState = this.getWorld().getBlockState(boundHeart);
+                BlockEntity blockEntity = this.getWorld().getBlockEntity(boundHeart);
+                Block block = blockState.getBlock();
+                if(blockEntity instanceof CreakingHeartBlockEntity) {
+                    ((CreakingHeartBlockEntity) blockEntity).trySpawnResin();
+                }
                 return false;
             }
         }

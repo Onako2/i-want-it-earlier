@@ -1,9 +1,13 @@
 package rs.onako2.iwie.entity.ai.goal;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import rs.onako2.iwie.entity.CreakingEntity;
 
 public class CreakingMeleeAttackGoal extends MeleeAttackGoal {
     protected final PathAwareEntity mob;
@@ -13,9 +17,21 @@ public class CreakingMeleeAttackGoal extends MeleeAttackGoal {
         this.mob = mob;
     }
 
+    public boolean isInMovableRange() {
+        if(this.mob instanceof CreakingEntity && ((CreakingEntity) this.mob).boundHeart != null) {
+            Vec3d pos0 = this.mob.getPos();
+            BlockPos pos1 = ((CreakingEntity) this.mob).boundHeart;
+            double range = pos0.distanceTo(Vec3d.of(pos1));
+            if(range < 30) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean canStart() {
-        if (isPlayerNotLookingAtEntity(this.mob.getTarget(), (HostileEntity) this.mob)) {
+        if (isPlayerNotLookingAtEntity(this.mob.getTarget(), (HostileEntity) this.mob) && isInMovableRange()) {
             return super.canStart();
         } else {
             return false;

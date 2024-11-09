@@ -11,7 +11,7 @@ import static rs.onako2.iwie.Init.*;
 
 public class ModRegistry {
     public static void registerItems() {
-        Registry.register(Registries.ITEM, Identifier.of("iwie", "test"), new BlockItem(TEST, new Item.Settings()));
+        //Registry.register(Registries.ITEM, Identifier.of("iwie", "test"), new BlockItem(TEST, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_log"), new BlockItem(PALE_OAK_LOG, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_short_grass"), new BlockItem(PALE_SHORT_GRASS, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_moss_block"), new BlockItem(PALE_MOSS_BLOCK, new Item.Settings()));
@@ -32,10 +32,19 @@ public class ModRegistry {
         Registry.register(Registries.ITEM, Identifier.of("iwie", "stripped_pale_oak_wood"), new BlockItem(STRIPPED_PALE_OAK_WOOD, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "creaking_spawn_egg"), CREAKING_SPAWN_EGG);
         Registry.register(Registries.ITEM, Identifier.of("iwie", "creaking_heart"), new BlockItem(CREAKING_HEART, new Item.Settings()));
+
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_block"), new BlockItem(RESIN_BLOCK, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_bricks"), new BlockItem(RESIN_BRICKS, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "chiseled_resin_bricks"), new BlockItem(CHISELED_RESIN_BRICK, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_brick_slab"), new BlockItem(RESIN_BRICK_SLAB, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_brick_stairs"), new BlockItem(RESIN_BRICK_STAIRS, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_brick_wall"), new BlockItem(RESIN_BRICK_WALL, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_clump"), RESIN_CLUMP);
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_brick"), RESIN_BRICK);
     }
 
     public static void registerBlocks() {
-        Registry.register(Registries.BLOCK, Identifier.of("iwie", "test"), TEST);
+        //Registry.register(Registries.BLOCK, Identifier.of("iwie", "test"), TEST);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_log"), PALE_OAK_LOG);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_short_grass"), PALE_SHORT_GRASS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_moss_block"), PALE_MOSS_BLOCK);
@@ -55,6 +64,13 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_wood"), PALE_OAK_WOOD);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "stripped_pale_oak_wood"), STRIPPED_PALE_OAK_WOOD);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "creaking_heart"), CREAKING_HEART);
+
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_block"), RESIN_BLOCK);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_bricks"), RESIN_BRICKS);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "chiseled_resin_bricks"), CHISELED_RESIN_BRICK);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_brick_slab"), RESIN_BRICK_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_brick_stairs"), RESIN_BRICK_STAIRS);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_brick_wall"), RESIN_BRICK_WALL);
     }
 
     public static void registerFuel() {
