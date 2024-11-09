@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import rs.onako2.iwie.entity.CreakingEntityRenderer;
 import rs.onako2.iwie.entity.CreakingModel;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -43,7 +44,10 @@ public class ClientInit implements ClientModInitializer {
             BlockColors blockColors = client.getBlockColors();
             blockColors.registerColorProvider(new PaleLeavesColorProvider(), Init.PALE_OAK_LEAVES);
 
-            //client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+            /*if (SystemUtils.IS_OS_WINDOWS) {
+                client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+            }*/
+
         });
 
         EntityRendererRegistry.register(Init.CREAKING, CreakingEntityRenderer::new);
