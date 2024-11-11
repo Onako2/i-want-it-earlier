@@ -102,10 +102,8 @@ public class Init implements ModInitializer {
     public static final Block RESIN_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
     public static final Block RESIN_BRICK_STAIRS = new StairsBlock(RESIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
     public static final Block RESIN_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).solid().hardness(1.5f));
-
     public static final Item RESIN_CLUMP = new Item(new Item.Settings());
     public static final Item RESIN_BRICK = new Item(new Item.Settings());
-
     public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Block PALE_HANGING_MOSS_PLANT = new PaleHangingMossPlantBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
     public static final Identifier PALE_OAK_TREE_FEATURE_ID = Identifier.of("iwie", "pale_oak_tree");
@@ -119,8 +117,6 @@ public class Init implements ModInitializer {
     public static final Identifier PALE_MOSS_PATCH_BONEMEAL_FEATURE_ID = Identifier.of("iwie", "pale_moss_patch_bonemeal");
     public static final PaleMossPatchBonemealFeature PALE_MOSS_PATCH_BONEMEAL_FEATURE = new PaleMossPatchBonemealFeature(PaleMossPatchBonemealConfig.CODEC);
     public static final TreeDecoratorType<CreakingHeartDecorator> CREAKING_HEART_DECORATOR_TREE_DECORATOR_TYPE = new TreeDecoratorType<>(CreakingHeartDecorator.CODEC);
-
-
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(PALE_OAK_LOG))
             .displayName(Text.translatable("itemGroup.iwie.main"))

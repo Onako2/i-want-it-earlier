@@ -12,17 +12,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.iwie.Init;
 import rs.onako2.iwie.entity.CreakingBlockEntityTypes;
-import rs.onako2.iwie.entity.CreakingEntity;
 import rs.onako2.iwie.entity.CreakingHeartBlockEntity;
 
 public class CreakingHeartBlock extends BlockWithEntity {
     public static BooleanProperty ACTIVATED = BooleanProperty.of("activated");
+
     public CreakingHeartBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(ACTIVATED, true));
@@ -67,7 +66,7 @@ public class CreakingHeartBlock extends BlockWithEntity {
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        neighborUpdate(state,world,pos,asBlock(),pos,true);
+        neighborUpdate(state, world, pos, asBlock(), pos, true);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class CreakingHeartBlock extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity != null) {
             CreakingHeartBlockEntity creakingHeartBlock = ((CreakingHeartBlockEntity) blockEntity);
-            if(creakingHeartBlock.creakingEntity != null) {
+            if (creakingHeartBlock.creakingEntity != null) {
                 BlockPos pos1 = creakingHeartBlock.creakingEntity.getBlockPos();
                 BlockPos pos2 = pos;
                 int distance = (int) Math.sqrt(

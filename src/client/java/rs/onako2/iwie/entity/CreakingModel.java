@@ -91,6 +91,4 @@ public class CreakingModel extends EntityModel<CreakingEntity> {
         this.head.pitch = headPitch * 0.017453292F;
         this.head.yaw = headYaw * 0.017453292F;
     }
-
-
 }

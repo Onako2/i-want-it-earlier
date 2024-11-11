@@ -11,7 +11,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import rs.onako2.iwie.entity.CreakingEntityRenderer;
 import rs.onako2.iwie.entity.CreakingModel;
-import org.apache.commons.lang3.SystemUtils;
 
 import java.util.concurrent.CompletableFuture;
 

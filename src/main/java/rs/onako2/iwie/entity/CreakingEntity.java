@@ -24,8 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import rs.onako2.iwie.Init;
-import rs.onako2.iwie.Util;
-import rs.onako2.iwie.block.CreakingHeartBlock;
 import rs.onako2.iwie.entity.ai.goal.CreakingMeleeAttackGoal;
 
 public class CreakingEntity extends HostileEntity {
@@ -37,7 +35,7 @@ public class CreakingEntity extends HostileEntity {
 
     public CreakingEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);;
+        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
     }
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
@@ -144,7 +142,7 @@ public class CreakingEntity extends HostileEntity {
                 BlockState blockState = this.getWorld().getBlockState(boundHeart);
                 BlockEntity blockEntity = this.getWorld().getBlockEntity(boundHeart);
                 Block block = blockState.getBlock();
-                if(blockEntity instanceof CreakingHeartBlockEntity) {
+                if (blockEntity instanceof CreakingHeartBlockEntity) {
                     ((CreakingHeartBlockEntity) blockEntity).trySpawnResin();
                 }
                 return false;
