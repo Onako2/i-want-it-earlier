@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "iwie:block/resin_brick_slab"
+    },
+    "type=double": {
+      "model": "iwie:block/resin_bricks"
+    },
+    "type=top": {
+      "model": "iwie:block/resin_brick_slab_top"
+    }
+  }
+}

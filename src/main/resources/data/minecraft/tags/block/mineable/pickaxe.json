@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "iwie:resin_bricks",
+    "iwie:chiseled_resin_bricks",
+    "iwie:resin_brick_slab",
+    "iwie:resin_brick_stairs",
+    "iwie:resin_brick_wall"
+  ]
+}
