@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
@@ -41,8 +40,6 @@ public class ClientInit implements ClientModInitializer {
                     e.printStackTrace();
                 }
             }
-            BlockColors blockColors = client.getBlockColors();
-            blockColors.registerColorProvider(new PaleLeavesColorProvider(), Init.PALE_OAK_LEAVES);
 
             if (SystemUtils.IS_OS_WINDOWS) {
                 client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
