@@ -27,6 +27,7 @@ public class ClientInit implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_OAK_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_HANGING_MOSS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_HANGING_MOSS_PLANT, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(Init.POTTED_PALE_OAK_SAPLING, RenderLayer.getCutout());
 
 
         MinecraftClient client = MinecraftClient.getInstance();

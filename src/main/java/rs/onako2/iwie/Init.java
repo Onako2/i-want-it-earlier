@@ -5,7 +5,23 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ButtonBlock;
+import net.minecraft.block.CarpetBlock;
+import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.PillarBlock;
+import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.SaplingBlock;
+import net.minecraft.block.ShortPlantBlock;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.WallBlock;
+import net.minecraft.block.WoodType;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
@@ -102,6 +118,7 @@ public class Init implements ModInitializer {
     public static final Block RESIN_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
     public static final Block RESIN_BRICK_STAIRS = new StairsBlock(RESIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
     public static final Block RESIN_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).solid().hardness(1.5f));
+    public static final Block POTTED_PALE_OAK_SAPLING = Blocks.createFlowerPotBlock(PALE_OAK_SAPLING);
     public static final Item RESIN_CLUMP = new Item(new Item.Settings());
     public static final Item RESIN_BRICK = new Item(new Item.Settings());
     public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
@@ -177,7 +194,7 @@ public class Init implements ModInitializer {
 
         FabricDefaultAttributeRegistry.register(CREAKING, CreakingEntity.createMobAttributes());
 
-        // check if Fabric API is present
+        // check if Wilder Wild is present
         if (FabricLoader.getInstance().isModLoaded("wilderwild")) {
             LOGGER.info("Wilder Wild mod is present, initializing compatibility features!");
             WilderWildCompat.init();

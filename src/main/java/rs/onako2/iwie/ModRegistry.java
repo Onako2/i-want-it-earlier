@@ -7,7 +7,35 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-import static rs.onako2.iwie.Init.*;
+import static rs.onako2.iwie.Init.CHISELED_RESIN_BRICK;
+import static rs.onako2.iwie.Init.CREAKING_HEART;
+import static rs.onako2.iwie.Init.CREAKING_SPAWN_EGG;
+import static rs.onako2.iwie.Init.PALE_HANGING_MOSS;
+import static rs.onako2.iwie.Init.PALE_HANGING_MOSS_PLANT;
+import static rs.onako2.iwie.Init.PALE_MOSS_BLOCK;
+import static rs.onako2.iwie.Init.PALE_MOSS_CARPET;
+import static rs.onako2.iwie.Init.PALE_OAK_BUTTON;
+import static rs.onako2.iwie.Init.PALE_OAK_FENCE;
+import static rs.onako2.iwie.Init.PALE_OAK_FENCE_GATE;
+import static rs.onako2.iwie.Init.PALE_OAK_LEAVES;
+import static rs.onako2.iwie.Init.PALE_OAK_LOG;
+import static rs.onako2.iwie.Init.PALE_OAK_PLANKS;
+import static rs.onako2.iwie.Init.PALE_OAK_PRESSURE_PLATE;
+import static rs.onako2.iwie.Init.PALE_OAK_SAPLING;
+import static rs.onako2.iwie.Init.PALE_OAK_SLAB;
+import static rs.onako2.iwie.Init.PALE_OAK_STRAIRS;
+import static rs.onako2.iwie.Init.PALE_OAK_WOOD;
+import static rs.onako2.iwie.Init.PALE_SHORT_GRASS;
+import static rs.onako2.iwie.Init.POTTED_PALE_OAK_SAPLING;
+import static rs.onako2.iwie.Init.RESIN_BLOCK;
+import static rs.onako2.iwie.Init.RESIN_BRICK;
+import static rs.onako2.iwie.Init.RESIN_BRICKS;
+import static rs.onako2.iwie.Init.RESIN_BRICK_SLAB;
+import static rs.onako2.iwie.Init.RESIN_BRICK_STAIRS;
+import static rs.onako2.iwie.Init.RESIN_BRICK_WALL;
+import static rs.onako2.iwie.Init.RESIN_CLUMP;
+import static rs.onako2.iwie.Init.STRIPPED_PALE_OAK_LOG;
+import static rs.onako2.iwie.Init.STRIPPED_PALE_OAK_WOOD;
 
 public class ModRegistry {
     public static void registerItems() {
@@ -57,6 +85,7 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_sapling"), PALE_OAK_SAPLING);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_leaves"), PALE_OAK_LEAVES);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_button"), PALE_OAK_BUTTON);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_pale_oak_sapling"), POTTED_PALE_OAK_SAPLING);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_pressure_plate"), PALE_OAK_PRESSURE_PLATE);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss"), PALE_HANGING_MOSS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss_plant"), PALE_HANGING_MOSS_PLANT);
