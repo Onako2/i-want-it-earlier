@@ -1,5 +1,6 @@
 package rs.onako2.iwie.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MossBlock;
 import net.minecraft.registry.RegistryKeys;
@@ -9,6 +10,13 @@ import net.minecraft.util.math.random.Random;
 import rs.onako2.iwie.Init;
 
 public class PaleMossBlock extends MossBlock {
+    public static final MapCodec<MossBlock> CODEC = createCodec(PaleMossBlock::new);
+    
+    @Override
+    public MapCodec<MossBlock> getCodec() {
+        return CODEC;
+    }
+    
     public PaleMossBlock(Settings settings) {
         super(settings);
     }

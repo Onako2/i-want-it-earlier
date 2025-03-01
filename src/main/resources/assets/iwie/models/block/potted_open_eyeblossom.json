@@ -1,0 +1,7 @@
+{
+  "parent": "iwie:block/flower_pot_cross_emissive",
+  "textures": {
+    "cross_emissive": "iwie:block/open_eyeblossom_emissive",
+    "plant": "iwie:block/open_eyeblossom"
+  }
+}

@@ -8,8 +8,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import static rs.onako2.iwie.Init.CHISELED_RESIN_BRICK;
+import static rs.onako2.iwie.Init.CLOSED_EYE_BLOSSOM_BLOCK;
 import static rs.onako2.iwie.Init.CREAKING_HEART;
 import static rs.onako2.iwie.Init.CREAKING_SPAWN_EGG;
+import static rs.onako2.iwie.Init.OPEN_EYE_BLOSSOM_BLOCK;
 import static rs.onako2.iwie.Init.PALE_HANGING_MOSS;
 import static rs.onako2.iwie.Init.PALE_HANGING_MOSS_PLANT;
 import static rs.onako2.iwie.Init.PALE_MOSS_BLOCK;
@@ -26,6 +28,8 @@ import static rs.onako2.iwie.Init.PALE_OAK_SLAB;
 import static rs.onako2.iwie.Init.PALE_OAK_STRAIRS;
 import static rs.onako2.iwie.Init.PALE_OAK_WOOD;
 import static rs.onako2.iwie.Init.PALE_SHORT_GRASS;
+import static rs.onako2.iwie.Init.POTTED_CLOSED_EYE_BLOSSOM;
+import static rs.onako2.iwie.Init.POTTED_OPEN_EYE_BLOSSOM;
 import static rs.onako2.iwie.Init.POTTED_PALE_OAK_SAPLING;
 import static rs.onako2.iwie.Init.RESIN_BLOCK;
 import static rs.onako2.iwie.Init.RESIN_BRICK;
@@ -59,6 +63,8 @@ public class ModRegistry {
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_wood"), new BlockItem(PALE_OAK_WOOD, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "stripped_pale_oak_wood"), new BlockItem(STRIPPED_PALE_OAK_WOOD, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "creaking_spawn_egg"), CREAKING_SPAWN_EGG);
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "closed_eyeblossom"), new BlockItem(CLOSED_EYE_BLOSSOM_BLOCK, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "open_eyeblossom"), new BlockItem(OPEN_EYE_BLOSSOM_BLOCK, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "creaking_heart"), new BlockItem(CREAKING_HEART, new Item.Settings()));
 
         Registry.register(Registries.ITEM, Identifier.of("iwie", "resin_block"), new BlockItem(RESIN_BLOCK, new Item.Settings()));
@@ -86,6 +92,8 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_leaves"), PALE_OAK_LEAVES);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_button"), PALE_OAK_BUTTON);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_pale_oak_sapling"), POTTED_PALE_OAK_SAPLING);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_closed_eyeblossom"), POTTED_CLOSED_EYE_BLOSSOM);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_open_eyeblossom"), POTTED_OPEN_EYE_BLOSSOM);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_pressure_plate"), PALE_OAK_PRESSURE_PLATE);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss"), PALE_HANGING_MOSS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss_plant"), PALE_HANGING_MOSS_PLANT);
@@ -93,6 +101,9 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_wood"), PALE_OAK_WOOD);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "stripped_pale_oak_wood"), STRIPPED_PALE_OAK_WOOD);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "creaking_heart"), CREAKING_HEART);
+        
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "closed_eyeblossom"), CLOSED_EYE_BLOSSOM_BLOCK);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "open_eyeblossom"), OPEN_EYE_BLOSSOM_BLOCK);
 
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_block"), RESIN_BLOCK);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "resin_bricks"), RESIN_BRICKS);

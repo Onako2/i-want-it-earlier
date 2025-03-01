@@ -6,18 +6,6 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:flowering_azalea"
-          },
-          "weight": 4
-        },
-        {
-          "data": {
-            "Name": "minecraft:azalea"
-          },
-          "weight": 7
-        },
-        {
-          "data": {
             "Name": "iwie:pale_moss_carpet"
           },
           "weight": 25
@@ -26,13 +14,7 @@
           "data": {
             "Name": "iwie:pale_short_grass"
           },
-          "weight": 50
-        },
-        {
-          "data": {
-            "Name": "iwie:pale_short_grass"
-          },
-          "weight": 50
+          "weight": 30
         },
         {
           "data": {
@@ -41,7 +23,19 @@
               "half": "lower"
             }
           },
-          "weight": 10
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "iwie:open_eyeblossom"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "iwie:closed_eyeblossom"
+          },
+          "weight": 1
         }
       ]
     }

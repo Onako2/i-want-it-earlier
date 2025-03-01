@@ -58,5 +58,7 @@
   "block.iwie.resin_bricks": "Harzziegel",
   "block.iwie.resin_clump": "Harzklumpen",
   "item.iwie.resin_clump": "Harzklumpen",
-  "item.iwie.resin_brick": "Harzziegel"
+  "item.iwie.resin_brick": "Harzziegel",
+  "block.iwie.open_eyeblossom": "Geöffnete Augenblüte",
+  "block.iwie.closed_eyeblossom": "Geschlossene Augenblüte"
 }

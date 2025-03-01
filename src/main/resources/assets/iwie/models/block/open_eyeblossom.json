@@ -1,0 +1,7 @@
+{
+  "parent": "iwie:block/cross_emissive",
+  "textures": {
+    "cross": "iwie:block/open_eyeblossom",
+    "cross_emissive": "iwie:block/open_eyeblossom_emissive"
+  }
+}

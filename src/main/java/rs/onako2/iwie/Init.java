@@ -27,6 +27,7 @@ import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.onako2.iwie.block.ClosedEyeBlossomBlock;
 import rs.onako2.iwie.block.CreakingHeartBlock;
+import rs.onako2.iwie.block.OpenEyeBlossomBlock;
 import rs.onako2.iwie.block.PaleHangingMossBlock;
 import rs.onako2.iwie.block.PaleHangingMossPlantBlock;
 import rs.onako2.iwie.block.PaleMossBlock;
@@ -113,6 +116,10 @@ public class Init implements ModInitializer {
 
     public static final Item CREAKING_SPAWN_EGG = new SpawnEggItem(CREAKING, 0xc4c4c4, 0xadadad, new Item.Settings());
 
+    public static final Block CLOSED_EYE_BLOSSOM_BLOCK = new ClosedEyeBlossomBlock(StatusEffects.NAUSEA, 7.0f, AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XZ).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly());
+    
+    public static final Block OPEN_EYE_BLOSSOM_BLOCK = new OpenEyeBlossomBlock(StatusEffects.BLINDNESS, 11.0f, AbstractBlock.Settings.create().mapColor(MapColor.DARK_AQUA).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XZ).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly());
+    
     public static final Block RESIN_BLOCK = new Block(AbstractBlock.Settings.create().hardness(0));
     public static final Block RESIN_BRICKS = new Block(AbstractBlock.Settings.create().hardness(1.5f));
     public static final Block CHISELED_RESIN_BRICK = new Block(AbstractBlock.Settings.create().hardness(1.5f));
@@ -120,6 +127,8 @@ public class Init implements ModInitializer {
     public static final Block RESIN_BRICK_STAIRS = new StairsBlock(RESIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(RESIN_BRICKS).hardness(1.5f));
     public static final Block RESIN_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(RESIN_BRICKS).solid().hardness(1.5f));
     public static final Block POTTED_PALE_OAK_SAPLING = Blocks.createFlowerPotBlock(PALE_OAK_SAPLING);
+    public static final Block POTTED_CLOSED_EYE_BLOSSOM = Blocks.createFlowerPotBlock(CLOSED_EYE_BLOSSOM_BLOCK);
+    public static final Block POTTED_OPEN_EYE_BLOSSOM = Blocks.createFlowerPotBlock(OPEN_EYE_BLOSSOM_BLOCK);
     public static final Item RESIN_CLUMP = new Item(new Item.Settings());
     public static final Item RESIN_BRICK = new Item(new Item.Settings());
     public static final Block PALE_HANGING_MOSS = new PaleHangingMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.MOSS_BLOCK).pistonBehavior(PistonBehavior.DESTROY));
@@ -150,6 +159,8 @@ public class Init implements ModInitializer {
                 entries.add(PALE_OAK_FENCE);
                 entries.add(PALE_OAK_FENCE_GATE);
                 entries.add(PALE_OAK_SAPLING);
+                entries.add(CLOSED_EYE_BLOSSOM_BLOCK);
+                entries.add(OPEN_EYE_BLOSSOM_BLOCK);
                 entries.add(PALE_OAK_LEAVES);
                 entries.add(PALE_OAK_BUTTON);
                 entries.add(PALE_OAK_PRESSURE_PLATE);
@@ -194,6 +205,8 @@ public class Init implements ModInitializer {
         Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
         
         ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_MOSS_BLOCK.asItem(), 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(OPEN_EYE_BLOSSOM_BLOCK.asItem(), 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(CLOSED_EYE_BLOSSOM_BLOCK.asItem(), 0.65f);
         ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_MOSS_CARPET.asItem(), 0.3f);
         ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_OAK_LEAVES.asItem(), 0.3f);
         ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_OAK_SAPLING.asItem(), 0.3f);

@@ -15,9 +15,7 @@ import rs.onako2.iwie.Init;
 
 public class CreakingHeartDecorator extends TreeDecorator {
 
-    public static final MapCodec<CreakingHeartDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(CreakingHeartDecorator::new, (decorator) -> {
-        return decorator.probability;
-    });
+    public static final MapCodec<CreakingHeartDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(CreakingHeartDecorator::new, (decorator) -> decorator.probability);
 
     private final float probability;
 
@@ -35,8 +33,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
         Random random = generator.getRandom();
         TestableWorld testableWorld = generator.getWorld();
         float floatRandom = random.nextFloat();
-
-        System.out.println("floatRandom: " + floatRandom);
+        
         if (floatRandom <= probability) {
             ObjectArrayList<BlockPos> logPositions = generator.getLogPositions();
             ObjectArrayList<BlockPos> filteredLogPositions = new ObjectArrayList<>();

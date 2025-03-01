@@ -59,5 +59,7 @@
   "block.iwie.resin_bricks": "Resin Bricks",
   "block.iwie.resin_clump": "Resin Clump",
   "item.iwie.resin_clump": "Resin Clump",
-  "item.iwie.resin_brick": "Resin Brick"
+  "item.iwie.resin_brick": "Resin Brick",
+  "block.iwie.open_eyeblossom": "Open Eyeblossom",
+  "block.iwie.closed_eyeblossom": "Closed Eyeblossom"
 }
