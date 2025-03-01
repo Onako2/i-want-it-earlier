@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.CarpetBlock;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LeavesBlock;
@@ -173,8 +174,6 @@ public class Init implements ModInitializer {
 
         LOGGER.info("Initializing items and blocks from 1.22 update!");
 
-        Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
-
         Registry.register(Registries.FEATURE, PALE_OAK_TREE_FEATURE_ID, PALE_FEATURE);
 
         Registry.register(Registries.FEATURE, PALE_MOSS_PATCH_FEATURE_ID, PALE_MOSS_PATCH_FEATURE);
@@ -191,6 +190,15 @@ public class Init implements ModInitializer {
         ModRegistry.registerBlocks();
         ModRegistry.registerItems();
         ModRegistry.registerFuel();
+        
+        Registry.register(Registries.ITEM_GROUP, Identifier.of("iwie", "main"), IWIE);
+        
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_MOSS_BLOCK.asItem(), 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_MOSS_CARPET.asItem(), 0.3f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_OAK_LEAVES.asItem(), 0.3f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_OAK_SAPLING.asItem(), 0.3f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_SHORT_GRASS.asItem(), 0.3f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(PALE_HANGING_MOSS.asItem(), 0.3f);
 
         FabricDefaultAttributeRegistry.register(CREAKING, CreakingEntity.createMobAttributes());
 
