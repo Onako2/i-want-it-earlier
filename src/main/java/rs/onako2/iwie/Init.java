@@ -7,10 +7,12 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.CarpetBlock;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LeavesBlock;
@@ -75,7 +77,6 @@ public class Init implements ModInitializer {
                     .build(null)
     );
 
-
     public static final Logger LOGGER = LoggerFactory.getLogger("iwie");
 
     //public static final Block TEST = new Block(AbstractBlock.Settings.create().strength(4.0f));
@@ -120,6 +121,8 @@ public class Init implements ModInitializer {
     
     public static final Block OPEN_EYE_BLOSSOM_BLOCK = new OpenEyeBlossomBlock(StatusEffects.BLINDNESS, 11.0f, AbstractBlock.Settings.create().mapColor(MapColor.DARK_AQUA).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XZ).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly());
     
+    public static final Block PALE_OAK_DOOR = new DoorBlock(BlockSetType.OAK, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY));
+    
     public static final Block RESIN_BLOCK = new Block(AbstractBlock.Settings.create().hardness(0));
     public static final Block RESIN_BRICKS = new Block(AbstractBlock.Settings.create().hardness(1.5f));
     public static final Block CHISELED_RESIN_BRICK = new Block(AbstractBlock.Settings.create().hardness(1.5f));
@@ -161,6 +164,7 @@ public class Init implements ModInitializer {
                 entries.add(PALE_OAK_SAPLING);
                 entries.add(CLOSED_EYE_BLOSSOM_BLOCK);
                 entries.add(OPEN_EYE_BLOSSOM_BLOCK);
+                entries.add(PALE_OAK_DOOR);
                 entries.add(PALE_OAK_LEAVES);
                 entries.add(PALE_OAK_BUTTON);
                 entries.add(PALE_OAK_PRESSURE_PLATE);

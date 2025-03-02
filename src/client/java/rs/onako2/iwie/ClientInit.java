@@ -32,11 +32,10 @@ public class ClientInit implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(Init.OPEN_EYE_BLOSSOM_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(Init.POTTED_CLOSED_EYE_BLOSSOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(Init.POTTED_OPEN_EYE_BLOSSOM, RenderLayer.getCutout());
-
+        BlockRenderLayerMap.INSTANCE.putBlock(Init.PALE_OAK_DOOR, RenderLayer.getCutout());
 
         MinecraftClient client = MinecraftClient.getInstance();
-
-
+        
         CompletableFuture.runAsync(() -> {
             while (client.getBlockColors() == null || client.getWindow() == null) {
                 try {

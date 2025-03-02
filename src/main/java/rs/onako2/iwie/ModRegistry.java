@@ -17,6 +17,7 @@ import static rs.onako2.iwie.Init.PALE_HANGING_MOSS_PLANT;
 import static rs.onako2.iwie.Init.PALE_MOSS_BLOCK;
 import static rs.onako2.iwie.Init.PALE_MOSS_CARPET;
 import static rs.onako2.iwie.Init.PALE_OAK_BUTTON;
+import static rs.onako2.iwie.Init.PALE_OAK_DOOR;
 import static rs.onako2.iwie.Init.PALE_OAK_FENCE;
 import static rs.onako2.iwie.Init.PALE_OAK_FENCE_GATE;
 import static rs.onako2.iwie.Init.PALE_OAK_LEAVES;
@@ -57,6 +58,7 @@ public class ModRegistry {
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_leaves"), new BlockItem(PALE_OAK_LEAVES, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_button"), new BlockItem(PALE_OAK_BUTTON, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_pressure_plate"), new BlockItem(PALE_OAK_PRESSURE_PLATE, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_door"), new BlockItem(PALE_OAK_DOOR, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_hanging_moss"), new BlockItem(PALE_HANGING_MOSS, new Item.Settings()));
         // no BlockItem for PALE_HANGING_MOSS_PLANT
         Registry.register(Registries.ITEM, Identifier.of("iwie", "stripped_pale_oak_log"), new BlockItem(STRIPPED_PALE_OAK_LOG, new Item.Settings()));
@@ -95,6 +97,7 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_closed_eyeblossom"), POTTED_CLOSED_EYE_BLOSSOM);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_open_eyeblossom"), POTTED_OPEN_EYE_BLOSSOM);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_pressure_plate"), PALE_OAK_PRESSURE_PLATE);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_door"), PALE_OAK_DOOR);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss"), PALE_HANGING_MOSS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss_plant"), PALE_HANGING_MOSS_PLANT);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "stripped_pale_oak_log"), STRIPPED_PALE_OAK_LOG);
