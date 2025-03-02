@@ -27,6 +27,7 @@ import static rs.onako2.iwie.Init.PALE_OAK_PRESSURE_PLATE;
 import static rs.onako2.iwie.Init.PALE_OAK_SAPLING;
 import static rs.onako2.iwie.Init.PALE_OAK_SLAB;
 import static rs.onako2.iwie.Init.PALE_OAK_STRAIRS;
+import static rs.onako2.iwie.Init.PALE_OAK_TRAPDOOR;
 import static rs.onako2.iwie.Init.PALE_OAK_WOOD;
 import static rs.onako2.iwie.Init.PALE_SHORT_GRASS;
 import static rs.onako2.iwie.Init.POTTED_CLOSED_EYE_BLOSSOM;
@@ -58,7 +59,10 @@ public class ModRegistry {
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_leaves"), new BlockItem(PALE_OAK_LEAVES, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_button"), new BlockItem(PALE_OAK_BUTTON, new Item.Settings()));
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_pressure_plate"), new BlockItem(PALE_OAK_PRESSURE_PLATE, new Item.Settings()));
+        
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_door"), new BlockItem(PALE_OAK_DOOR, new Item.Settings()));
+        Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_oak_trapdoor"), new BlockItem(PALE_OAK_TRAPDOOR, new Item.Settings()));
+        
         Registry.register(Registries.ITEM, Identifier.of("iwie", "pale_hanging_moss"), new BlockItem(PALE_HANGING_MOSS, new Item.Settings()));
         // no BlockItem for PALE_HANGING_MOSS_PLANT
         Registry.register(Registries.ITEM, Identifier.of("iwie", "stripped_pale_oak_log"), new BlockItem(STRIPPED_PALE_OAK_LOG, new Item.Settings()));
@@ -97,7 +101,10 @@ public class ModRegistry {
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_closed_eyeblossom"), POTTED_CLOSED_EYE_BLOSSOM);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "potted_open_eyeblossom"), POTTED_OPEN_EYE_BLOSSOM);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_pressure_plate"), PALE_OAK_PRESSURE_PLATE);
+        
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_door"), PALE_OAK_DOOR);
+        Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_oak_trapdoor"), PALE_OAK_TRAPDOOR);
+        
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss"), PALE_HANGING_MOSS);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "pale_hanging_moss_plant"), PALE_HANGING_MOSS_PLANT);
         Registry.register(Registries.BLOCK, Identifier.of("iwie", "stripped_pale_oak_log"), STRIPPED_PALE_OAK_LOG);

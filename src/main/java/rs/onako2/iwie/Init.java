@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.CarpetBlock;
@@ -23,6 +22,7 @@ import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.ShortPlantBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.enums.NoteBlockInstrument;
@@ -121,7 +121,8 @@ public class Init implements ModInitializer {
     
     public static final Block OPEN_EYE_BLOSSOM_BLOCK = new OpenEyeBlossomBlock(StatusEffects.BLINDNESS, 11.0f, AbstractBlock.Settings.create().mapColor(MapColor.DARK_AQUA).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XZ).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly());
     
-    public static final Block PALE_OAK_DOOR = new DoorBlock(BlockSetType.OAK, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_OAK_DOOR = new DoorBlock(ModBlockSetType.PALE, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY));
+    public static final Block PALE_OAK_TRAPDOOR = new TrapdoorBlock(ModBlockSetType.PALE, AbstractBlock.Settings.create().mapColor(PALE_OAK_PLANKS.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().allowsSpawning(Blocks::never).burnable());
     
     public static final Block RESIN_BLOCK = new Block(AbstractBlock.Settings.create().hardness(0));
     public static final Block RESIN_BRICKS = new Block(AbstractBlock.Settings.create().hardness(1.5f));
