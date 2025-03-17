@@ -1,16 +1,20 @@
 package rs.onako2;
 
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 public class ModRegistry {
     public static void registerItems() {
-        net.minecraft.registry.Registry.register(Registries.ITEM, Identifier.of("iwie", "test"), new BlockItem(Init.TEST, new Item.Settings()));
+        Items.register(IWantItEarlier.TEST);
     }
-
-    public static void registerBlocks() {
-        net.minecraft.registry.Registry.register(Registries.BLOCK, Identifier.of("iwie", "test"), Init.TEST);
+    
+    private static Block registerStairsBlock(Identifier id, Block base) {
+        return Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, id), settings -> new StairsBlock(base.getDefaultState(), settings), AbstractBlock.Settings.copy(base));
     }
 }

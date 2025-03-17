@@ -18,16 +18,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "rs.onako2.Init"
+      "rs.onako2.IWantItEarlier"
     ],
     "client": [
-      "rs.onako2.ClientInit"
+      "rs.onako2.IWantItEarlierClient"
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14.22",
-    "minecraft": ">=1.21.1",
+    "fabricloader": ">=0.16",
+    "minecraft": ">=1.21.4",
     "java": ">=21",
-    "fabric-api": ">=0.78"
+    "fabric-api": ">=0.110"
   }
 }

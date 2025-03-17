@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "iwie:block/test"
+      },
+      {
+        "model": "iwie:block/test",
+        "y": 90
+      },
+      {
+        "model": "iwie:block/test",
+        "y": 180
+      },
+      {
+        "model": "iwie:block/test",
+        "y": 270
+      }
+    ]
+  }
+}
