@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "iwie:item/harness_color",
+    "layer1": "iwie:item/harness_base"
+  }
+}

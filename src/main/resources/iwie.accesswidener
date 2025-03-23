@@ -1,1 +1,5 @@
 accessWidener v2 named
+accessible class net/minecraft/entity/mob/GhastEntity$FlyRandomlyGoal
+accessible class net/minecraft/entity/mob/GhastEntity$GhastMoveControl
+accessible field net/minecraft/entity/ai/control/MoveControl state Lnet/minecraft/entity/ai/control/MoveControl$State;
+accessible class net/minecraft/entity/ai/control/MoveControl$State

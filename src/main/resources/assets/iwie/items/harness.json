@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "iwie:item/harness",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}
