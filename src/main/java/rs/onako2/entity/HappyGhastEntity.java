@@ -15,13 +15,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.PlayerInput;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.IWantItEarlier;
+import rs.onako2.entity.ai.FlyingTemptGoal;
 
 import java.util.Objects;
 
@@ -33,14 +33,15 @@ public class HappyGhastEntity extends GhastEntity {
     }
     
     public static net.minecraft.entity.attribute.DefaultAttributeContainer.Builder createHappyGhastAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 40.0).add(EntityAttributes.FOLLOW_RANGE, 100.0);
+        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 40.0).add(EntityAttributes.FOLLOW_RANGE, 100.0).add(EntityAttributes.TEMPT_RANGE, 100.0);
     }
     
     @Override
     protected void initGoals() {
+        this.goalSelector.add(1, new FlyingTemptGoal(this, stack -> stack.getItem() == IWantItEarlier.HARNESS && this.harnessColor == -1));
         this.goalSelector.add(5, new FlyRandomlyGoal(this));
-        //this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, (entity, world) -> Math.abs(entity.getY() - this.getY()) <= 4.0));
         this.moveControl = new GhastMoveControl(this);
+        setPersistent();
     }
     
     @Override
@@ -103,7 +104,6 @@ public class HappyGhastEntity extends GhastEntity {
     public void tick() {
         super.tick();
         if (this.getFirstPassenger() instanceof ServerPlayerEntity player) {
-            player.sendMessage(Text.of(harnessColor + ""), true);
             PlayerInput playerInput = player.getPlayerInput();
             this.rotate(player.headYaw, player.getPitch());
             if (playerInput.forward() && !playerInput.backward()) {
