@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.AnimalArmorItem;
@@ -52,6 +54,22 @@ public class IWantItEarlier implements ModInitializer {
     
     public static final Item HAPPY_GHAST_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.HAPPY_GHAST_SPAWN_EGG_ID), settings -> new SpawnEggItem(HAPPY_GHAST, settings));
     public static final Item HARNESS = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.HARNESS), settings -> new HarnessItem(ArmorMaterials.LEATHER, AnimalArmorItem.Type.EQUESTRIAN, settings));
+    private static final ItemStack RED_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack ORANGE_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack YELLOW_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack LIME_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack GREEN_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack LIGHT_BLUE_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack CYAN_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack BLUE_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack PURPLE_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack MAGENTA_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack PINK_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack WHITE_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack LIGHT_GRAY_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack GRAY_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack BLACK_HARNESS = new ItemStack(HARNESS);
+    private static final ItemStack BROWN_HARNESS = new ItemStack(HARNESS);
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
@@ -59,14 +77,48 @@ public class IWantItEarlier implements ModInitializer {
                 entries.add(TEST);
                 entries.add(DRIED_GHAST_BLOCK);
                 entries.add(HAPPY_GHAST_SPAWN_EGG);
-                entries.add(HARNESS);
+                entries.add(RED_HARNESS);
+                entries.add(ORANGE_HARNESS);
+                entries.add(YELLOW_HARNESS);
+                entries.add(LIME_HARNESS);
+                entries.add(GREEN_HARNESS);
+                entries.add(LIGHT_BLUE_HARNESS);
+                entries.add(CYAN_HARNESS);
+                entries.add(BLUE_HARNESS);
+                entries.add(PURPLE_HARNESS);
+                entries.add(MAGENTA_HARNESS);
+                entries.add(PINK_HARNESS);
+                entries.add(WHITE_HARNESS);
+                entries.add(LIGHT_GRAY_HARNESS);
+                entries.add(GRAY_HARNESS);
+                entries.add(BLACK_HARNESS);
+                entries.add(BROWN_HARNESS);
             })
             .build();
+    
+    static {
+        RED_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(11546150, false));
+        ORANGE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(16351261, false));
+        YELLOW_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(16701501, false));
+        LIME_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(8439583, false));
+        GREEN_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(6192150, false));
+        LIGHT_BLUE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(3847130, false));
+        CYAN_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(1481884, false));
+        BLUE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(3949738, false));
+        PURPLE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(8991416, false));
+        MAGENTA_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(13061821, false));
+        PINK_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(15961002, false));
+        WHITE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(16383998, false));
+        LIGHT_GRAY_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(10329495, false));
+        GRAY_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(4673362, false));
+        BLACK_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(1908001, false));
+        BROWN_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(8606770, false));
+    }
     
     @Override
     public void onInitialize() {
         
-        LOGGER.info("Initializing item and block from next update!");
+        LOGGER.info("Initializing items and blocks from next update!");
         
         Registry.register(Registries.ITEM_GROUP, Identifier.of(MOD_ID, "main"), IWIE);
         

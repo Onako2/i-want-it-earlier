@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_leather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_leather"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "iwie:harness_black",
+      "iwie:harness_blue",
+      "iwie:harness_brown",
+      "iwie:harness_cyan",
+      "iwie:harness_gray",
+      "iwie:harness_green",
+      "iwie:harness_light_blue",
+      "iwie:harness_light_gray",
+      "iwie:harness_lime",
+      "iwie:harness_magenta",
+      "iwie:harness_orange",
+      "iwie:harness_pink",
+      "iwie:harness_purple",
+      "iwie:harness_red",
+      "iwie:harness_white",
+      "iwie:harness_yello"
+    ]
+  }
+}

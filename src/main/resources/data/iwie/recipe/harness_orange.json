@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "LLL",
+    "GWG"
+  ],
+  "key": {
+    "L": "minecraft:leather",
+    "G": "glass",
+    "W": [
+      "minecraft:orange_wool"
+    ]
+  },
+  "result": {
+    "id": "iwie:harness",
+    "components": {
+      "minecraft:dyed_color": {
+        "rgb": 16351261,
+        "show_in_tooltip": false
+      }
+    }
+  }
+}
