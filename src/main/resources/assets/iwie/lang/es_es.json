@@ -1,0 +1,12 @@
+{
+  "block.iwie.test": "A ver",
+  "itemGroup.iwie.main": "Lo quiero mas temprano!",
+  "modmenu.nameTranslation.iwie": "Lo quiero mas temprano!",
+  "modmenu.descriptionTranslation.iwie": "Esa mod da items y blocks antes que lo hay en el original!",
+  "modmenu.summaryTranslation.iwie": "Esa mod da items y blocks antes que lo hay en el original!",
+  "block.iwie.dried_ghast": "Ghast seco",
+  "entity.iwie.happy_ghast": "Ghast contento",
+  "entity.iwie.ghastling": "Ghastisito",
+  "item.iwie.happy_ghast_spawn_egg": "Huevo de Ghastisito",
+  "item.iwie.harness": "Silla de montar"
+}
