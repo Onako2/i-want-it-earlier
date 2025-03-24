@@ -10,16 +10,16 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class DriedGhastBlock extends HorizontalFacingBlock {
-    
+
     public DriedGhastBlock(Settings settings) {
         super(settings);
     }
-    
+
     @Override
     protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
         return null;
     }
-    
+
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);

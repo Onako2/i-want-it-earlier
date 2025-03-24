@@ -1,5 +1,6 @@
 package rs.onako2.entity;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.entity.Entity;
@@ -22,28 +23,57 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.IWantItEarlier;
 import rs.onako2.entity.ai.FlyingTemptGoal;
+import rs.onako2.network.HappyGhastInformationPayload;
 
 import java.util.Objects;
 
 public class HappyGhastEntity extends GhastEntity {
-    private int harnessColor = -1;
-    
+    public int harnessColor = -2;
+    public boolean hasPassenger = false;
+
     public HappyGhastEntity(EntityType<? extends GhastEntity> entityType, World world) {
         super(entityType, world);
     }
-    
+
     public static net.minecraft.entity.attribute.DefaultAttributeContainer.Builder createHappyGhastAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 40.0).add(EntityAttributes.FOLLOW_RANGE, 100.0).add(EntityAttributes.TEMPT_RANGE, 100.0);
     }
-    
+
+    @Override
+    public boolean hasPassengers() {
+        return hasPassenger || super.hasPassengers();
+    }
+
+    @Override
+    protected void addPassenger(Entity passenger) {
+        super.addPassenger(passenger);
+        this.getWorld().getPlayers().forEach(player -> {
+            if (player instanceof ServerPlayerEntity) {
+                ServerPlayNetworking.send((ServerPlayerEntity) player, new HappyGhastInformationPayload(uuid, hasPassengers(), harnessColor));
+            }
+        });
+    }
+
+    @Override
+    protected void removePassenger(Entity passenger) {
+        super.removePassenger(passenger);
+        if (!this.hasPassengers()) {
+            this.getWorld().getPlayers().forEach(player -> {
+                if (player instanceof ServerPlayerEntity) {
+                    ServerPlayNetworking.send((ServerPlayerEntity) player, new HappyGhastInformationPayload(uuid, hasPassengers(), harnessColor));
+                }
+            });
+        }
+    }
+
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new FlyingTemptGoal(this, stack -> stack.getItem() == IWantItEarlier.HARNESS && this.harnessColor == -1));
+        this.goalSelector.add(1, new FlyingTemptGoal(this, stack -> stack.getItem() == IWantItEarlier.HARNESS && (this.harnessColor == -1 || this.harnessColor == -2)));
         this.goalSelector.add(5, new FlyRandomlyGoal(this));
         this.moveControl = new GhastMoveControl(this);
         setPersistent();
     }
-    
+
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ActionResult actionResult = super.interactMob(player, hand);
@@ -61,21 +91,25 @@ public class HappyGhastEntity extends GhastEntity {
                     : ActionResult.SUCCESS;
         }
     }
-    
+
     public boolean canBeHarnessed() {
         return this.isAlive() && !this.isBaby();
     }
-    
+
     public boolean isHarnessed() {
-        return harnessColor != -1;
+        return harnessColor != -1 && harnessColor != -2;
     }
-    
+
+    public int getHarnessColor() {
+        return harnessColor;
+    }
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("HarnessColor", harnessColor);
     }
-    
+
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
@@ -85,7 +119,7 @@ public class HappyGhastEntity extends GhastEntity {
             harnessColor = -1;
         }
     }
-    
+
     public void harness(ItemStack stack, @Nullable SoundCategory soundCategory) {
         DyedColorComponent component = stack.get(DataComponentTypes.DYED_COLOR);
         if (component == null) {
@@ -99,7 +133,7 @@ public class HappyGhastEntity extends GhastEntity {
         this.moveControl.moveTo(this.getX(), this.getY(), this.getZ(), 1.0f);
         this.moveControl.state = MoveControl.State.WAIT;
     }
-    
+
     @Override
     public void tick() {
         super.tick();
@@ -118,7 +152,7 @@ public class HappyGhastEntity extends GhastEntity {
             if (playerInput.right() && !playerInput.left()) {
                 this.sidewaysSpeed = -1.0f;
             }
-            
+
             // upward and downward movement
             if (playerInput.sprint() && Math.abs(player.getPitch()) >= 10.0f && (playerInput.forward() || playerInput.backward())) {
                 this.setUpwardSpeed(Math.clamp(player.getPitch() / (playerInput.backward() ? 80.0f : -80.0f), -1.0f, 1.0f));
@@ -130,30 +164,30 @@ public class HappyGhastEntity extends GhastEntity {
             this.forwardSpeed = 0.0f;
         }
     }
-    
+
     @Override
     public boolean collidesWith(Entity other) {
         return true;
     }
-    
+
     @Override
     public boolean isCollidable() {
         return true;
     }
-    
+
     @Override
     public boolean isPushable() {
         return true;
     }
-    
+
     public static class FlyRandomlyGoal extends GhastEntity.FlyRandomlyGoal {
         private final HappyGhastEntity happyGhast;
-        
+
         public FlyRandomlyGoal(HappyGhastEntity happyGhast) {
             super(happyGhast);
             this.happyGhast = happyGhast;
         }
-        
+
         @Override
         public boolean canStart() {
             return !happyGhast.isHarnessed() && super.canStart();

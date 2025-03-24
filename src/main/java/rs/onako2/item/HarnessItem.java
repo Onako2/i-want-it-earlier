@@ -14,7 +14,7 @@ public class HarnessItem extends AnimalArmorItem {
     public HarnessItem(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }
-    
+
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);

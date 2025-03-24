@@ -2,12 +2,15 @@ package rs.onako2;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.DyedColorComponent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.AnimalArmorItem;
@@ -29,11 +32,13 @@ import org.slf4j.LoggerFactory;
 import rs.onako2.block.DriedGhastBlock;
 import rs.onako2.entity.HappyGhastEntity;
 import rs.onako2.item.HarnessItem;
+import rs.onako2.network.HappyGhastInformationPayload;
+import rs.onako2.network.HappyGhastInformationRequestPayload;
 
 public class IWantItEarlier implements ModInitializer {
     public static final String MOD_ID = "iwie";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    
+
     public static final EntityType<HappyGhastEntity> HAPPY_GHAST = Registry.register(
             Registries.ENTITY_TYPE,
             Identifiers.HAPPY_GHAST_ID,
@@ -47,11 +52,11 @@ public class IWantItEarlier implements ModInitializer {
                     .passengerAttachments(new Vec3d(0, 4, -2))
                     .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifiers.HAPPY_GHAST_ID))
     );
-    
+
     public static final Block TEST = Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, Identifiers.TEST_ID), AbstractBlock.Settings.create().strength(4.0f));
-    
+
     public static final Block DRIED_GHAST_BLOCK = Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, Identifiers.DRIED_GHAST_ID), DriedGhastBlock::new, AbstractBlock.Settings.create().ticksRandomly().solid());
-    
+
     public static final Item HAPPY_GHAST_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.HAPPY_GHAST_SPAWN_EGG_ID), settings -> new SpawnEggItem(HAPPY_GHAST, settings));
     public static final Item HARNESS = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.HARNESS), settings -> new HarnessItem(ArmorMaterials.LEATHER, AnimalArmorItem.Type.EQUESTRIAN, settings));
     private static final ItemStack RED_HARNESS = new ItemStack(HARNESS);
@@ -95,7 +100,7 @@ public class IWantItEarlier implements ModInitializer {
                 entries.add(BROWN_HARNESS);
             })
             .build();
-    
+
     static {
         RED_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(11546150, false));
         ORANGE_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(16351261, false));
@@ -114,16 +119,35 @@ public class IWantItEarlier implements ModInitializer {
         BLACK_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(1908001, false));
         BROWN_HARNESS.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(8606770, false));
     }
-    
+
     @Override
     public void onInitialize() {
-        
+
         LOGGER.info("Initializing items and blocks from next update!");
-        
+
         Registry.register(Registries.ITEM_GROUP, Identifier.of(MOD_ID, "main"), IWIE);
-        
+
         ModRegistry.registerItems();
-        
+
         FabricDefaultAttributeRegistry.register(HAPPY_GHAST, HappyGhastEntity.createHappyGhastAttributes());
+
+
+        PayloadTypeRegistry.playS2C().register(HappyGhastInformationPayload.ID, HappyGhastInformationPayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(HappyGhastInformationRequestPayload.ID, HappyGhastInformationRequestPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(HappyGhastInformationRequestPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                context.server().getWorlds().forEach(world -> {
+                    Entity entity = world.getEntity(payload.uuid());
+                    if (entity instanceof HappyGhastEntity happyGhastEntity) {
+                        boolean hasPassenger = happyGhastEntity.hasPassengers();
+                        int color = happyGhastEntity.getHarnessColor();
+                        ServerPlayNetworking.send(context.player(), new HappyGhastInformationPayload(payload.uuid(), hasPassenger, color));
+                    }
+                });
+            });
+        });
+
+
     }
 }

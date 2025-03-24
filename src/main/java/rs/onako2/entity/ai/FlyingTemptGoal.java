@@ -21,14 +21,14 @@ public class FlyingTemptGoal extends Goal {
     protected PlayerEntity closestPlayer;
     private int cooldown;
     private boolean active;
-    
+
     public FlyingTemptGoal(FlyingEntity entity, Predicate<ItemStack> foodPredicate) {
         this.mob = entity;
         this.foodPredicate = foodPredicate;
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
         this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate((entityx, world) -> this.foodPredicate.test(entityx.getMainHandStack()) || this.foodPredicate.test(entityx.getOffHandStack()));
     }
-    
+
     @Override
     public boolean canStart() {
         if (this.cooldown > 0) {
@@ -39,18 +39,18 @@ public class FlyingTemptGoal extends Goal {
             return this.closestPlayer != null;
         }
     }
-    
-    
+
+
     @Override
     public boolean shouldContinue() {
         return this.canStart();
     }
-    
+
     @Override
     public void start() {
         this.active = true;
     }
-    
+
     @Override
     public void stop() {
         this.closestPlayer = null;
@@ -58,7 +58,7 @@ public class FlyingTemptGoal extends Goal {
         this.cooldown = toGoalTicks(100);
         this.active = false;
     }
-    
+
     @Override
     public void tick() {
         if (this.closestPlayer != null) {
@@ -81,5 +81,5 @@ public class FlyingTemptGoal extends Goal {
             }
         }
     }
-    
+
 }
