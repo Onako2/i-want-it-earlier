@@ -73,10 +73,10 @@ public class CreakingEntity extends HostileEntity {
             return;
         }
         BlockEntity blockEntity = this.getWorld().getBlockEntity(this.getBlockPos());
-        if (blockEntity != null) {
-            ((CreakingHeartBlockEntity) blockEntity).creakingEntity = this;
+        if (blockEntity instanceof CreakingHeartBlockEntity creakingHeartBlockEntity) {
+            creakingHeartBlockEntity.creakingEntity = this;
         }
-        boolean isHeartNear = false;
+        boolean isHeartNear;
         isHeartNear = this.isHeartNear();
 
         if (this.isHeartSpawn && this.getWorld().isDay() && !this.getWorld().isThundering() || (this.isHeartSpawn && !isHeartNear)) {
