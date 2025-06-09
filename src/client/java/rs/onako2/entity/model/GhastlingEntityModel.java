@@ -4,14 +4,13 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.GhastEntityModel;
-import net.minecraft.client.render.entity.model.ModelTransformer;
 import net.minecraft.util.math.MathHelper;
 import rs.onako2.entity.state.HappyGhastRenderState;
 
-public class HappyGhastEntityModel extends EntityModel<HappyGhastRenderState> {
+public class GhastlingEntityModel extends EntityModel<HappyGhastRenderState> {
     private final ModelPart[] tentacles = new ModelPart[9];
 
-    public HappyGhastEntityModel(ModelPart modelPart) {
+    public GhastlingEntityModel(ModelPart modelPart) {
         super(modelPart);
 
         for (int i = 0; i < this.tentacles.length; i++) {
@@ -23,8 +22,8 @@ public class HappyGhastEntityModel extends EntityModel<HappyGhastRenderState> {
         return "tentacle" + index;
     }
 
-    public static TexturedModelData getTexturedModelData(float scaling) {
-        return GhastEntityModel.getTexturedModelData().transform(ModelTransformer.scaling(scaling));
+    public static TexturedModelData getTexturedModelData() {
+        return GhastEntityModel.getTexturedModelData();
     }
 
     public void setAngles(HappyGhastRenderState happyGhastRenderState) {

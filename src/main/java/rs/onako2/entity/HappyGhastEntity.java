@@ -4,12 +4,19 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -19,6 +26,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.PlayerInput;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.IWantItEarlier;
@@ -28,8 +37,11 @@ import rs.onako2.network.HappyGhastInformationPayload;
 import java.util.Objects;
 
 public class HappyGhastEntity extends GhastEntity {
+    private static final TrackedData<Boolean> CHILD = DataTracker.registerData(PassiveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public int harnessColor = -2;
     public boolean hasPassenger = false;
+    protected int breedingAge;
+    protected int forcedAge;
 
     public HappyGhastEntity(EntityType<? extends GhastEntity> entityType, World world) {
         super(entityType, world);
@@ -37,6 +49,70 @@ public class HappyGhastEntity extends GhastEntity {
 
     public static net.minecraft.entity.attribute.DefaultAttributeContainer.Builder createHappyGhastAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 40.0).add(EntityAttributes.FOLLOW_RANGE, 100.0).add(EntityAttributes.TEMPT_RANGE, 100.0);
+    }
+
+    public static int toGrowUpAge(int breedingAge) {
+        return (int) (breedingAge / 20 * 0.1F);
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        if (entityData == null) {
+            entityData = new PassiveEntity.PassiveData(true);
+        }
+
+        PassiveEntity.PassiveData passiveData = (PassiveEntity.PassiveData) entityData;
+        if (passiveData.canSpawnBaby() && passiveData.getSpawnedCount() > 0 && world.getRandom().nextFloat() <= passiveData.getBabyChance()) {
+            this.setBreedingAge(-24000);
+        }
+
+        passiveData.countSpawned();
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(CHILD, false);
+    }
+
+    public int getBreedingAge() {
+        if (this.getWorld().isClient) {
+            return this.dataTracker.get(CHILD) ? -1 : 1;
+        } else {
+            return this.breedingAge;
+        }
+    }
+
+    public void setBreedingAge(int age) {
+        int i = this.getBreedingAge();
+        this.breedingAge = age;
+        if (i < 0 && age >= 0 || i >= 0 && age < 0) {
+            this.dataTracker.set(CHILD, age < 0);
+            this.onGrowUp();
+        }
+    }
+
+    public void growUp(int age, boolean overGrow) {
+        int i = this.getBreedingAge();
+        i += age * 20;
+        if (i > 0) {
+            i = 0;
+        }
+
+        int k = 0;
+        this.setBreedingAge(i);
+        if (overGrow) {
+            this.forcedAge += k;
+        }
+
+        if (this.getBreedingAge() == 0) {
+            this.setBreedingAge(this.forcedAge);
+        }
+    }
+
+    public void growUp(int age) {
+        this.growUp(age, false);
     }
 
     @Override
@@ -108,6 +184,8 @@ public class HappyGhastEntity extends GhastEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("HarnessColor", harnessColor);
+        nbt.putInt("Age", this.getBreedingAge());
+        nbt.putInt("ForcedAge", this.forcedAge);
     }
 
     @Override
@@ -118,6 +196,8 @@ public class HappyGhastEntity extends GhastEntity {
         } else {
             harnessColor = -1;
         }
+        this.setBreedingAge(nbt.getInt("Age"));
+        this.forcedAge = nbt.getInt("ForcedAge");
     }
 
     public void harness(ItemStack stack, @Nullable SoundCategory soundCategory) {
@@ -132,6 +212,31 @@ public class HappyGhastEntity extends GhastEntity {
         }
         this.moveControl.moveTo(this.getX(), this.getY(), this.getZ(), 1.0f);
         this.moveControl.state = MoveControl.State.WAIT;
+    }
+
+    @Override
+    public void onTrackedDataSet(TrackedData<?> data) {
+        if (CHILD.equals(data)) {
+            this.calculateDimensions();
+        }
+
+        super.onTrackedDataSet(data);
+    }
+
+    protected void onGrowUp() {
+        if (!this.isBaby() && this.hasVehicle() && this.getVehicle() instanceof AbstractBoatEntity abstractBoatEntity && !abstractBoatEntity.isSmallerThanBoat(this)) {
+            this.stopRiding();
+        }
+    }
+
+    @Override
+    public boolean isBaby() {
+        return this.getBreedingAge() < 0;
+    }
+
+    @Override
+    public void setBaby(boolean baby) {
+        this.setBreedingAge(baby ? -24000 : 0);
     }
 
     @Override
@@ -178,6 +283,41 @@ public class HappyGhastEntity extends GhastEntity {
     @Override
     public boolean isPushable() {
         return true;
+    }
+
+    public static class PassiveData implements EntityData {
+        private final boolean babyAllowed;
+        private final float babyChance;
+        private int spawnCount;
+
+        public PassiveData(boolean babyAllowed, float babyChance) {
+            this.babyAllowed = babyAllowed;
+            this.babyChance = babyChance;
+        }
+
+        public PassiveData(boolean babyAllowed) {
+            this(babyAllowed, 0.05F);
+        }
+
+        public PassiveData(float babyChance) {
+            this(true, babyChance);
+        }
+
+        public int getSpawnedCount() {
+            return this.spawnCount;
+        }
+
+        public void countSpawned() {
+            this.spawnCount++;
+        }
+
+        public boolean canSpawnBaby() {
+            return this.babyAllowed;
+        }
+
+        public float getBabyChance() {
+            return this.babyChance;
+        }
     }
 
     public static class FlyRandomlyGoal extends GhastEntity.FlyRandomlyGoal {

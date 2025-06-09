@@ -7,6 +7,7 @@ public class Identifiers {
     public static Identifier TEST_ID = Identifier.of(IWantItEarlier.MOD_ID, "test");
     public static Identifier DRIED_GHAST_ID = Identifier.of(IWantItEarlier.MOD_ID, "dried_ghast");
     public static Identifier HAPPY_GHAST_ID = Identifier.of(IWantItEarlier.MOD_ID, "happy_ghast");
+    public static Identifier GHASTLING_ID = Identifier.of(IWantItEarlier.MOD_ID, "ghastling");
     public static Identifier HAPPY_GHAST_SPAWN_EGG_ID = Identifier.of(IWantItEarlier.MOD_ID, "happy_ghast_spawn_egg");
     public static Identifier HARNESS = Identifier.of(IWantItEarlier.MOD_ID, "harness");
     public static Identifier HAPPY_GHAST_INFORMATION_PAYLOAD_ID = Identifier.of(IWantItEarlier.MOD_ID, "information_payload");

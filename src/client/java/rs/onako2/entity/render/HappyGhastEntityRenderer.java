@@ -1,21 +1,22 @@
 package rs.onako2.entity.render;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.render.entity.AgeableMobEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 import rs.onako2.IWantItEarlier;
 import rs.onako2.entity.HappyGhastEntity;
+import rs.onako2.entity.model.GhastlingEntityModel;
 import rs.onako2.entity.model.HappyGhastEntityModel;
 import rs.onako2.entity.state.HappyGhastRenderState;
 import rs.onako2.network.HappyGhastInformationRequestPayload;
 
-public class HappyGhastEntityRenderer extends MobEntityRenderer<HappyGhastEntity, HappyGhastRenderState, HappyGhastEntityModel> {
+public class HappyGhastEntityRenderer extends AgeableMobEntityRenderer<HappyGhastEntity, HappyGhastRenderState, HappyGhastEntityModel> {
     private static final Identifier TEXTURE = Identifier.of(IWantItEarlier.MOD_ID, "textures/entity/happy_ghast/happy_ghast.png");
 
     public HappyGhastEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new HappyGhastEntityModel(context.getPart(EntityModelLayers.GHAST)), 1.5F);
+        super(context, new HappyGhastEntityModel(context.getPart(EntityModelLayers.GHAST)), new GhastlingEntityModel(context.getPart(EntityModelLayers.GHAST)), 1.5F);
         this.addFeature(new HappyGhastHarnessAdaptRenderer(this));
         this.addFeature(new HappyGhastHarnessStaticRenderer(this));
     }

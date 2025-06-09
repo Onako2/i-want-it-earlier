@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 public class IWantItEarlierClient implements ClientModInitializer {
 
     public static final EntityModelLayer MODEL_HAPPY_GHAST_LAYER = new EntityModelLayer(Identifiers.HAPPY_GHAST_ID, "main");
+    public static final EntityModelLayer MODEL_GHASTLING_LAYER = new EntityModelLayer(Identifiers.GHASTLING_ID, "main");
     public static final EntityModelLayer MODEL_HAPPY_GHAST_HARNESS_STATIC = new EntityModelLayer(Identifiers.HAPPY_GHAST_ID, "static");
     public static final EntityModelLayer MODEL_HAPPY_GHAST_HARNESS_ADAPT = new EntityModelLayer(Identifiers.HAPPY_GHAST_ID, "adapt");
 
@@ -42,7 +43,8 @@ public class IWantItEarlierClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(IWantItEarlier.HAPPY_GHAST, HappyGhastEntityRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_HAPPY_GHAST_LAYER, HappyGhastEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_HAPPY_GHAST_LAYER, HappyGhastEntityModel.getTexturedModelData(0));
+        EntityModelLayerRegistry.registerModelLayer(MODEL_GHASTLING_LAYER, HappyGhastEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(MODEL_HAPPY_GHAST_HARNESS_ADAPT, HappyGhastHarnessAdaptModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(MODEL_HAPPY_GHAST_HARNESS_STATIC, HappyGhastHarnessStaticModel::getTexturedModelData);
 
