@@ -13,7 +13,7 @@ public class ModRegistry {
     public static void registerItems() {
         Items.register(IWantItEarlier.TEST);
     }
-    
+
     private static Block registerStairsBlock(Identifier id, Block base) {
         return Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, id), settings -> new StairsBlock(base.getDefaultState(), settings), AbstractBlock.Settings.copy(base));
     }

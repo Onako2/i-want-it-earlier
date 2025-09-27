@@ -16,6 +16,7 @@
   "license": "MIT",
   "icon": "assets/iwie/icon.png",
   "environment": "*",
+  "accessWidener": "iwie.accesswidener",
   "entrypoints": {
     "main": [
       "rs.onako2.IWantItEarlier"

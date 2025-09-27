@@ -1,1 +1,6 @@
 accessWidener v2 named
+accessible field net/minecraft/entity/passive/SquidEntity swimVec Lnet/minecraft/util/math/Vec3d;
+accessible class net/minecraft/entity/passive/SquidEntity$EscapeAttackerGoal
+accessible method net/minecraft/entity/passive/SquidEntity$EscapeAttackerGoal <init> (Lnet/minecraft/entity/passive/SquidEntity;)V
+accessible class net/minecraft/entity/passive/SquidEntity$SwimGoal
+accessible method net/minecraft/entity/passive/SquidEntity$SwimGoal <init> (Lnet/minecraft/entity/passive/SquidEntity;)V

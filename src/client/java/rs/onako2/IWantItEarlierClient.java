@@ -1,9 +1,12 @@
 package rs.onako2;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import rs.onako2.render.AbstractNautilusEntityRenderer;
 
 public class IWantItEarlierClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        EntityRendererRegistry.register(IWantItEarlier.NAUTILUS_ENTITY, AbstractNautilusEntityRenderer::new);
     }
 }
