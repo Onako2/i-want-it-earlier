@@ -27,7 +27,9 @@ loom {
             sourceSet sourceSets.client
         }
     }
-
+    
+    accessWidenerPath = file("src/main/resources/iwie.accesswidener")
+    
 }
 
 dependencies {
