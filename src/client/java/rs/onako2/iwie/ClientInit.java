@@ -12,6 +12,8 @@ import org.apache.commons.lang3.SystemUtils;
 import rs.onako2.iwie.entity.CreakingEntityRenderer;
 import rs.onako2.iwie.entity.CreakingModel;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.concurrent.CompletableFuture;
 
 public class ClientInit implements ClientModInitializer {
@@ -46,7 +48,21 @@ public class ClientInit implements ClientModInitializer {
             }
 
             if (SystemUtils.IS_OS_WINDOWS) {
-                client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+                File config = new File("promotion.iwie");
+                boolean mayPromote = true;
+                try {
+                    if (config.createNewFile()) {
+                        Files.writeString(config.toPath(), "true");
+                    } else {
+                        mayPromote = Boolean.parseBoolean(Files.readString(config.toPath()));
+                    }
+                } catch (Exception e) {
+                    mayPromote = false;
+                }
+
+                if (mayPromote) {
+                    client.getWindow().setTitle("https://modrinth.com/mod/i-want-it-earlier");
+                }
             }
 
         });
