@@ -30,8 +30,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class AbstractSpearItem extends Item {
-    public AbstractSpearItem(Item.Settings settings) {
+public class SpearItem extends Item {
+    public SpearItem(Item.Settings settings) {
         super(settings);
     }
 
