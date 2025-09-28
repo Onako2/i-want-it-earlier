@@ -23,17 +23,18 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rs.onako2.iwie.entity.AbstractNautilusEntity;
+import rs.onako2.iwie.entity.NautilusEntity;
 import rs.onako2.iwie.item.AbstractSpearItem;
 
 public class IWantItEarlier implements ModInitializer {
     public static final String MOD_ID = "iwie";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public static final EntityType<AbstractNautilusEntity> NAUTILUS_ENTITY = Registry.register(
+    public static final EntityType<NautilusEntity> NAUTILUS_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
             Identifiers.NAUTILUS_ID,
-            EntityType.Builder.create(AbstractNautilusEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(0.8F, 0.8F)
+            EntityType.Builder.create(NautilusEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(1.0F, 1.5F)
                     .eyeHeight(0.4F)
                     .maxTrackingRange(24)
                     .makeFireImmune()
