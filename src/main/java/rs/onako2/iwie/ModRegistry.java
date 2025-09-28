@@ -1,4 +1,4 @@
-package rs.onako2;
+package rs.onako2.iwie;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;

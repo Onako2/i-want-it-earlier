@@ -1,4 +1,4 @@
-package rs.onako2.state;
+package rs.onako2.iwie.state;
 
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 

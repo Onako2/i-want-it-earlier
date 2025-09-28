@@ -1,4 +1,4 @@
-package rs.onako2.entity;
+package rs.onako2.iwie.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;

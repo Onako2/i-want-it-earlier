@@ -1,4 +1,4 @@
-package rs.onako2;
+package rs.onako2.iwie;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -13,6 +13,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -21,7 +22,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rs.onako2.entity.AbstractNautilusEntity;
+import rs.onako2.iwie.entity.AbstractNautilusEntity;
+import rs.onako2.iwie.item.AbstractSpearItem;
 
 public class IWantItEarlier implements ModInitializer {
     public static final String MOD_ID = "iwie";
@@ -43,12 +45,25 @@ public class IWantItEarlier implements ModInitializer {
 
     public static final Item NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(NAUTILUS_ENTITY, settings));
 
+    public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.WOOD, 3.0F, -2.4F)));
+    public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.STONE, 3.0F, -2.4F)));
+    public static final Item IRON_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.IRON_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.IRON, 3.0F, -2.4F)));
+    public static final Item GOLDEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.GOLDEN_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.GOLD, 3.0F, -2.4F)));
+    public static final Item DIAMOND_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.DIAMOND_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.DIAMOND, 3.0F, -2.4F)));
+    public static final Item NETHERITE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NETHERITE_SPEAR_ID), settings -> new AbstractSpearItem(settings.sword(ToolMaterial.NETHERITE, 3.0F, -2.4F).fireproof()));
+
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
                 entries.add(TEST);
                 entries.add(NAUTILUS_SPAWN_EGG);
+                entries.add(WOODEN_SPEAR);
+                entries.add(STONE_SPEAR);
+                entries.add(IRON_SPEAR);
+                entries.add(GOLDEN_SPEAR);
+                entries.add(DIAMOND_SPEAR);
+                entries.add(NETHERITE_SPEAR);
             })
             .build();
 

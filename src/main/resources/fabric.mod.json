@@ -19,12 +19,15 @@
   "accessWidener": "iwie.accesswidener",
   "entrypoints": {
     "main": [
-      "rs.onako2.IWantItEarlier"
+      "rs.onako2.iwie.IWantItEarlier"
     ],
     "client": [
-      "rs.onako2.IWantItEarlierClient"
+      "rs.onako2.iwie.IWantItEarlierClient"
     ]
   },
+  "mixins": [
+    "iwie.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.16",
     "minecraft": ">=1.21.4",

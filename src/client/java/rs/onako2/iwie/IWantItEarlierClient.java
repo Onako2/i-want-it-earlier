@@ -1,8 +1,8 @@
-package rs.onako2;
+package rs.onako2.iwie;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import rs.onako2.render.AbstractNautilusEntityRenderer;
+import rs.onako2.iwie.render.AbstractNautilusEntityRenderer;
 
 public class IWantItEarlierClient implements ClientModInitializer {
     @Override

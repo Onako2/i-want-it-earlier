@@ -1,19 +1,18 @@
-package rs.onako2.render;
+package rs.onako2.iwie.render;
 
 import net.minecraft.client.render.entity.AgeableMobEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
-import rs.onako2.IWantItEarlier;
-import rs.onako2.entity.AbstractNautilusEntity;
-import rs.onako2.model.AbstractNautilusEntityModel;
-import rs.onako2.state.AbstractNautilusEntityRenderState;
+import rs.onako2.iwie.IWantItEarlier;
+import rs.onako2.iwie.entity.AbstractNautilusEntity;
+import rs.onako2.iwie.model.AbstractNautilusEntityModel;
+import rs.onako2.iwie.state.AbstractNautilusEntityRenderState;
 
 public class AbstractNautilusEntityRenderer extends AgeableMobEntityRenderer<AbstractNautilusEntity, AbstractNautilusEntityRenderState, AbstractNautilusEntityModel> {
-    private static final Identifier TEXTURE = Identifier.of(IWantItEarlier.MOD_ID, "textures/entity/nautilus/nautilus.png");
+    public static final Identifier TEXTURE = Identifier.of(IWantItEarlier.MOD_ID, "textures/entity/nautilus/nautilus.png");
 
     public AbstractNautilusEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new AbstractNautilusEntityModel(context.getPart(EntityModelLayers.SQUID)), new AbstractNautilusEntityModel(context.getPart(EntityModelLayers.SQUID)), 1.5F);
+        super(context, new AbstractNautilusEntityModel(AbstractNautilusEntityModel.createBodyLayer().createModel()), new AbstractNautilusEntityModel(AbstractNautilusEntityModel.createBodyLayer().createModel()), 1.5F);
     }
 
     @Override
