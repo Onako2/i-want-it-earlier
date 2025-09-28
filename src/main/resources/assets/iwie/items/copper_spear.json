@@ -7,14 +7,14 @@
         "when": "ground",
         "model": {
           "type": "minecraft:model",
-          "model": "iwie:item/wooden_spear_gui"
+          "model": "iwie:item/copper_spear_gui"
         }
       },
       {
         "when": "gui",
         "model": {
           "type": "minecraft:model",
-          "model": "iwie:item/wooden_spear_gui"
+          "model": "iwie:item/copper_spear_gui"
         }
       }
     ],
