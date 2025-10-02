@@ -1,9 +1,7 @@
 package rs.onako2.iwie.entity;
 
-import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.SwimNavigation;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -16,18 +14,13 @@ import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.PlayerInput;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,9 +30,9 @@ public class AbstractNautilusEntity extends SquidEntity {
             DataTracker.registerData(AbstractNautilusEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public int harnessColor = -2;
     public boolean hasPassenger = false;
+    public boolean isTempted = false;
     protected int breedingAge;
     protected int forcedAge;
-    public boolean isTempted = false;
 
     public AbstractNautilusEntity(EntityType<? extends SquidEntity> entityType, World world) {
         super(entityType, world);
@@ -73,21 +66,6 @@ public class AbstractNautilusEntity extends SquidEntity {
 
         }
         super.tickMovement();
-    }
-
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
-        if (entityData == null) {
-            entityData = new PassiveEntity.PassiveData(true);
-        }
-
-        PassiveEntity.PassiveData passiveData = (PassiveEntity.PassiveData) entityData;
-        if (passiveData.canSpawnBaby() && passiveData.getSpawnedCount() > 0 && world.getRandom().nextFloat() <= passiveData.getBabyChance()) {
-            this.setBreedingAge(-24000);
-        }
-
-        passiveData.countSpawned();
-        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override
@@ -158,36 +136,6 @@ public class AbstractNautilusEntity extends SquidEntity {
         return hasPassenger || super.hasPassengers();
     }
 
-    @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (this.hasPassengers() || this.isBaby()) {
-            return super.interactMob(player, hand);
-        } else {
-            ItemStack itemStack = player.getStackInHand(hand);
-            if (!itemStack.isEmpty()) {
-                ActionResult actionResult = itemStack.useOnEntity(player, this, hand);
-                if (player.getStackInHand(hand).isOf(Items.SADDLE) && !this.hasSaddleEquipped()) {
-                    this.equipSaddle(itemStack);
-                    return ActionResult.SUCCESS;
-                }
-
-                if (!this.isWearingBodyArmor()) {
-                    this.equipNautilusArmor(player, itemStack);
-                    return ActionResult.SUCCESS;
-                }
-
-                if (actionResult.isAccepted()) {
-                    return actionResult;
-                }
-            }
-
-            if (this.equipment.get(EquipmentSlot.SADDLE) != null && this.equipment.get(EquipmentSlot.SADDLE).getCount() >= 1) {
-                this.putPlayerOnBack(player);
-            }
-            return ActionResult.SUCCESS;
-        }
-    }
-
     protected void putPlayerOnBack(PlayerEntity player) {
         if (!this.getWorld().isClient) {
             player.setYaw(this.getYaw());
@@ -247,6 +195,13 @@ public class AbstractNautilusEntity extends SquidEntity {
         this.setBreedingAge(baby ? -24000 : 0);
     }
 
+    @Override
+    public EntityNavigation createNavigation(World world) {
+        SwimNavigation nav = new SwimNavigation(this, world);
+        nav.setCanSwim(true); // ensure navigator is allowed to swim
+        return nav;
+    }
+
     public static class SwimGoal extends SquidEntity.SwimGoal {
         private final AbstractNautilusEntity squid;
 
@@ -274,12 +229,5 @@ public class AbstractNautilusEntity extends SquidEntity {
             super.stop();
             squid.swimVec = Vec3d.ZERO;
         }
-    }
-
-    @Override
-    public EntityNavigation createNavigation(World world) {
-        SwimNavigation nav = new SwimNavigation(this, world);
-        nav.setCanSwim(true); // ensure navigator is allowed to swim
-        return nav;
     }
 }
