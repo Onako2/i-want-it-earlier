@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "iwie:item/copper_spear"
+    "layer0": "iwie:item/spear/copper_spear"
   }
 }
