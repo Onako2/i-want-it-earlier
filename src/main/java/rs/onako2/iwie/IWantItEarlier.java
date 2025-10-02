@@ -34,7 +34,7 @@ public class IWantItEarlier implements ModInitializer {
             Registries.ENTITY_TYPE,
             Identifiers.NAUTILUS_ID,
             EntityType.Builder.create(NautilusEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(1.0F, 1.5F)
+                    .dimensions(1.0F, 1.15F)
                     .eyeHeight(0.4F)
                     .maxTrackingRange(24)
                     .makeFireImmune()
