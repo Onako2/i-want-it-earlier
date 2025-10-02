@@ -2,8 +2,8 @@
   "format_version": "1.21.6",
   "texture_size": [32, 32],
   "textures": {
-    "0": "iwie:item/spear/three_d/wooden_spear",
-    "particle": "iwie:item/spear/three_d/wooden_spear"
+    "0": "iwie:item/spear/three_d/diamond_spear",
+    "particle": "iwie:item/spear/three_d/diamond_spear"
   },
   "elements": [
     {

@@ -27,7 +27,7 @@
       },
       "on_false": {
         "type": "minecraft:model",
-        "model": "minecraft:item/diamond_sword"
+        "model": "iwie:item/wooden_spear_hand"
       }
     }
   }
