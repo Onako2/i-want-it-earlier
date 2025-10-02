@@ -1,10 +1,11 @@
 package rs.onako2.iwie.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.SwimNavigation;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -24,6 +25,7 @@ import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.PlayerInput;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -37,17 +39,14 @@ public class AbstractNautilusEntity extends SquidEntity {
     public boolean hasPassenger = false;
     protected int breedingAge;
     protected int forcedAge;
+    public boolean isTempted = false;
 
     public AbstractNautilusEntity(EntityType<? extends SquidEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public static net.minecraft.entity.attribute.DefaultAttributeContainer.Builder createAbstractNautilusAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 20.0).add(EntityAttributes.FOLLOW_RANGE, 40.0).add(EntityAttributes.TEMPT_RANGE, 40.0);
-    }
-
-    public static int toGrowUpAge(int breedingAge) {
-        return breedingAge / 2;
+        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 20.0).add(EntityAttributes.FOLLOW_RANGE, 40.0).add(EntityAttributes.TEMPT_RANGE, 64.0);
     }
 
     @Override
@@ -248,27 +247,39 @@ public class AbstractNautilusEntity extends SquidEntity {
         this.setBreedingAge(baby ? -24000 : 0);
     }
 
-    @Override
-    public boolean collidesWith(Entity other) {
-        return true;
-    }
-
-    @Override
-    public boolean isPushable() {
-        return true;
-    }
-
     public static class SwimGoal extends SquidEntity.SwimGoal {
-        private final SquidEntity squid;
+        private final AbstractNautilusEntity squid;
 
         public SwimGoal(SquidEntity squid) {
             super(squid);
-            this.squid = squid;
+            this.squid = (AbstractNautilusEntity) squid;
         }
 
         @Override
         public boolean canStart() {
-            return !squid.hasPassengers();
+            return !squid.hasPassengers() && !squid.isTempted;
         }
+
+        @Override
+        public void tick() {
+            if (squid.isTempted) {
+                stop();
+                return;
+            }
+            super.tick();
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            squid.swimVec = Vec3d.ZERO;
+        }
+    }
+
+    @Override
+    public EntityNavigation createNavigation(World world) {
+        SwimNavigation nav = new SwimNavigation(this, world);
+        nav.setCanSwim(true); // ensure navigator is allowed to swim
+        return nav;
     }
 }
