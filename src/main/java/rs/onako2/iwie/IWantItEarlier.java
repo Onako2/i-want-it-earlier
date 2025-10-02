@@ -58,7 +58,7 @@ public class IWantItEarlier implements ModInitializer {
             .icon(() -> new ItemStack(TEST))
             .displayName(Text.translatable("itemGroup.iwie.main"))
             .entries((context, entries) -> {
-                entries.add(TEST);
+                //entries.add(TEST);
                 entries.add(NAUTILUS_SPAWN_EGG);
                 entries.add(WOODEN_SPEAR);
                 entries.add(STONE_SPEAR);
