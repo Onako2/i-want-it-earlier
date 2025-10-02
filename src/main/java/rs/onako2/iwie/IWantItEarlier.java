@@ -46,13 +46,13 @@ public class IWantItEarlier implements ModInitializer {
 
     public static final Item NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(NAUTILUS_ENTITY, settings));
 
-    public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.WOOD, 3.0F, -2.4F)));
-    public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.STONE, 3.0F, -2.4F)));
-    public static final Item COPPER_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.COPPER_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 3.0F, -2.4F)));
-    public static final Item IRON_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.IRON_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 3.0F, -2.4F)));
-    public static final Item GOLDEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.GOLDEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.GOLD, 3.0F, -2.4F)));
-    public static final Item DIAMOND_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.DIAMOND_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.DIAMOND, 3.0F, -2.4F)));
-    public static final Item NETHERITE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NETHERITE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.NETHERITE, 3.0F, -2.4F).fireproof()));
+    public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.WOOD, 7.0F, -2.4F)));
+    public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.STONE, 7.0F, -2.4F)));
+    public static final Item COPPER_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.COPPER_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 7.0F, -2.4F)));
+    public static final Item IRON_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.IRON_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 7.0F, -2.4F)));
+    public static final Item GOLDEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.GOLDEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.GOLD, 7.0F, -2.4F)));
+    public static final Item DIAMOND_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.DIAMOND_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.DIAMOND, 7.0F, -2.4F)));
+    public static final Item NETHERITE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NETHERITE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.NETHERITE, 7.0F, -2.4F).fireproof()));
 
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(TEST))
