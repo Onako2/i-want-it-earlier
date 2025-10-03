@@ -9,6 +9,7 @@ import rs.onako2.iwie.render.NautilusEntityRenderer;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.locks.LockSupport;
 
 public class IWantItEarlierClient implements ClientModInitializer {
 
@@ -19,11 +20,7 @@ public class IWantItEarlierClient implements ClientModInitializer {
 
         CompletableFuture.runAsync(() -> {
             while (client.getWindow() == null) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                LockSupport.parkNanos(100 * 1000 * 1000);
             }
 
             if (SystemUtils.IS_OS_WINDOWS) {
