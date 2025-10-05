@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "iwie:diamond_spear",
+  "addition": "minecraft:netherite_ingot",
+  "template": "minecraft:netherite_upgrade_smithing_template",
+  "result": {
+    "id": "iwie:netherite_spear",
+    "count": 1
+  }
+}

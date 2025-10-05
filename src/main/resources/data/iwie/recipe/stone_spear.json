@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "#minecraft:stone_tool_materials",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "  X",
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "id": "iwie:stone_spear",
+    "count": 1
+  }
+}
