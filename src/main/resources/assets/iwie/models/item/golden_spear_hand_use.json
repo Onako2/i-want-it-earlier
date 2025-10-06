@@ -3,21 +3,21 @@
   "format_version": "1.21.6",
   "display": {
     "thirdperson_righthand": {
-      "rotation": [-45, 0, 0],
-      "translation": [0, -8.5, 2]
+      "rotation": [-60, 0, 0],
+      "translation": [0, -8.25, 2]
     },
     "thirdperson_lefthand": {
-      "rotation": [-45, 0, 0],
-      "translation": [0, -8.5, 2]
+      "rotation": [-60, 0, 0],
+      "translation": [0, -8.25, 2]
     },
     "firstperson_righthand": {
-      "rotation": [-50, 0, 0],
-      "translation": [0, -8.5, 2],
+      "rotation": [-70, 0, 0],
+      "translation": [0, -8.25, 2],
       "scale": [0.8, 0.8, 0.8]
     },
     "firstperson_lefthand": {
-      "rotation": [-50, 0, 0],
-      "translation": [0, -8.5, 2],
+      "rotation": [-70, 0, 0],
+      "translation": [0, -8.25, 2],
       "scale": [0.8, 0.8, 0.8]
     }
   }

@@ -23,7 +23,7 @@
       "property": "minecraft:using_item",
       "on_true": {
         "type": "minecraft:model",
-        "model": "minecraft:item/golden_sword"
+        "model": "iwie:item/diamond_spear_hand_use"
       },
       "on_false": {
         "type": "minecraft:model",

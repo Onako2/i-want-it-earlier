@@ -1,5 +1,5 @@
 {
-  "parent": "iwie:item/wooden_spear_base",
+  "parent": "iwie:item/iron_spear_base",
   "format_version": "1.21.6",
   "display": {
     "thirdperson_righthand": {

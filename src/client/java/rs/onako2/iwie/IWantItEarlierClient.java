@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import org.apache.commons.lang3.SystemUtils;
 import rs.onako2.iwie.render.NautilusEntityRenderer;
+import rs.onako2.iwie.render.ZombieNautilusEntityRenderer;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -17,6 +18,7 @@ public class IWantItEarlierClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(IWantItEarlier.NAUTILUS_ENTITY, NautilusEntityRenderer::new);
+        EntityRendererRegistry.register(IWantItEarlier.ZOMBIE_NAUTILUS_ENTITY, ZombieNautilusEntityRenderer::new);
 
         CompletableFuture.runAsync(() -> {
             while (client.getWindow() == null) {
