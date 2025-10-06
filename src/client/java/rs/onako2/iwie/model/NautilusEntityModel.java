@@ -46,8 +46,8 @@ public class NautilusEntityModel extends EntityModel<NautilusEntityRenderState> 
         return TexturedModelData.of(ModelData, 128, 128);
     }
 
-	@Override
-	public void setAngles(NautilusEntityRenderState renderState) {
+    @Override
+    public void setAngles(NautilusEntityRenderState renderState) {
         // TODO: IMPLEMENT
-	}
+    }
 }

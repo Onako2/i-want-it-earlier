@@ -15,6 +15,7 @@ import java.util.concurrent.locks.LockSupport;
 public class IWantItEarlierClient implements ClientModInitializer {
 
     public static final MinecraftClient client = MinecraftClient.getInstance();
+
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(IWantItEarlier.NAUTILUS_ENTITY, NautilusEntityRenderer::new);
