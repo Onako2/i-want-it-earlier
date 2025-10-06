@@ -20,7 +20,7 @@ public class AbstractNautilusEntity extends SquidEntity {
     }
 
     public static net.minecraft.entity.attribute.DefaultAttributeContainer.Builder createAbstractNautilusAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 20.0).add(EntityAttributes.FOLLOW_RANGE, 40.0).add(EntityAttributes.TEMPT_RANGE, 64.0);
+        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 14.0).add(EntityAttributes.FOLLOW_RANGE, 40.0).add(EntityAttributes.TEMPT_RANGE, 64.0);
     }
 
     @Override

@@ -3,5 +3,16 @@
   "itemGroup.iwie.main": "Ich will es früher!",
   "modmenu.nameTranslation.iwie": "I want it earlier!",
   "modmenu.descriptionTranslation.iwie": "Diese Mod fügt Items und Blöcke hinzu bevor sie überhaupt veröffentlicht wurden!",
-  "modmenu.summaryTranslation.iwie": "Diese Mod fügt Items und Blöcke hinzu bevor sie überhaupt veröffentlicht wurden!"
+  "modmenu.summaryTranslation.iwie": "Diese Mod fügt Items und Blöcke hinzu bevor sie überhaupt veröffentlicht wurden!",
+  "item.iwie.nautilus_spawn_egg": "Nautilus Spawn-Ei",
+  "item.iwie.zombie_nautilus_spawn_egg": "Zombie Nautilus Spawn-Ei",
+  "item.iwie.wooden_spear": "Holzspeer",
+  "item.iwie.stone_spear": "Steinspeer",
+  "item.iwie.copper_spear": "Kupferspeer",
+  "item.iwie.iron_spear": "Eisenspeer",
+  "item.iwie.golden_spear": "Goldspeer",
+  "item.iwie.diamond_spear": "Diamantspeer",
+  "item.iwie.netherite_spear": "Netheritspeer",
+  "entity.iwie.nautilus": "Nautilus",
+  "entity.iwie.zombie_nautilus": "Zombie Nautilus"
 }
