@@ -27,23 +27,22 @@ public class NautilusEntityModel extends EntityModel<NautilusEntityRenderState> 
     }
 
     public static TexturedModelData createBodyLayer() {
-        ModelData ModelData = new ModelData();
-        ModelPartData ModelPartData = ModelData.getRoot();
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+        ModelPartData shell = modelPartData.addChild("shell", ModelPartBuilder.create().uv(0, 0).cuboid(-7.0F, -13.5F, -13.5F, 14.0F, 18.0F, 16.0F, new Dilation(0.0F))
+                .uv(0, 54).cuboid(-7.0F, 2.5F, 2.5F, 14.0F, 2.0F, 4.0F, new Dilation(0.0F))
+                .uv(0, 4).cuboid(-7.0F, -3.5F, -1.5F, 1.0F, 8.0F, 4.0F, new Dilation(0.0F))
+                .uv(6, 4).cuboid(6.0F, -3.5F, -1.5F, 1.0F, 8.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 19.5F, 5.5F));
 
-        ModelPartData shell = ModelPartData.addChild("shell", ModelPartBuilder.create().uv(0, 0).cuboid(-15.0F, -18.0F, 0.0F, 14.0F, 18.0F, 16.0F, new Dilation(0.0F))
-                .uv(0, 58).cuboid(-15.0F, -2.0F, 16.0F, 14.0F, 2.0F, 4.0F, new Dilation(0.0F))
-                .uv(0, 66).cuboid(-15.0F, -8.0F, 12.0F, 14.0F, 8.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(8.0F, 24.0F, -8.0F));
+        ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(17, 34).cuboid(-6.0F, -4.0F, -7.25F, 12.0F, 8.0F, 11.0F, new Dilation(0.0F))
+                .uv(40, 37).cuboid(-6.0F, -4.0F, 1.75F, 12.0F, 8.0F, 0.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 20.0F, 11.25F));
 
-        ModelPartData head = ModelPartData.addChild("head", ModelPartBuilder.create().uv(9, 34).cuboid(-6.0F, -8.0F, 4.0F, 12.0F, 8.0F, 11.0F, new Dilation(0.0F))
-                .uv(32, 37).cuboid(-6.0F, -8.0F, 13.0F, 12.0F, 8.0F, 0.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 24.0F, 0.0F));
+        ModelPartData mouth = modelPartData.addChild("mouth", ModelPartBuilder.create().uv(44, 1).cuboid(-3.0F, -2.0F, -2.0F, 6.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 20.0F, 15.0F));
 
-        ModelPartData mouth = ModelPartData.addChild("mouth", ModelPartBuilder.create().uv(0, 34).cuboid(-3.0F, -6.0F, 13.0F, 6.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 24.0F, 0.0F));
+        ModelPartData tentacles_down = modelPartData.addChild("tentacles_down", ModelPartBuilder.create().uv(0, 38).cuboid(-6.0F, -2.0F, -1.5F, 12.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 22.0F, 16.5F));
 
-        ModelPartData tentaclesDown = ModelPartData.addChild("tentacles_down", ModelPartBuilder.create().uv(34, 54).cuboid(-6.0F, -4.0F, 15.0F, 12.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 24.0F, 0.0F));
-
-        ModelPartData tentaclesUp = ModelPartData.addChild("tentacles_up", ModelPartBuilder.create().uv(34, 62).cuboid(-6.0F, -8.0F, 15.0F, 12.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 24.0F, 0.0F));
-
-        return TexturedModelData.of(ModelData, 128, 128);
+        ModelPartData tentacles_up = modelPartData.addChild("tentacles_up", ModelPartBuilder.create().uv(34, 53).cuboid(-6.0F, -2.0F, -1.5F, 12.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 18.0F, 16.5F));
+        return TexturedModelData.of(modelData, 64, 64);
     }
 
     @Override
