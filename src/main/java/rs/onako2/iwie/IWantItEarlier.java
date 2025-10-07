@@ -1,6 +1,8 @@
 package rs.onako2.iwie;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -22,6 +24,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.BiomeKeys;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rs.onako2.iwie.effect.BreathOfTheNautilusEffect;
@@ -34,6 +38,7 @@ public class IWantItEarlier implements ModInitializer {
     public static final String MOD_ID = "iwie";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    @NotNull
     public static final EntityType<NautilusEntity> NAUTILUS_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
             Identifiers.NAUTILUS_ID,
@@ -46,6 +51,7 @@ public class IWantItEarlier implements ModInitializer {
                     .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifiers.NAUTILUS_ID))
     );
 
+    @NotNull
     public static final EntityType<ZombieNautilusEntity> ZOMBIE_NAUTILUS_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
             Identifiers.ZOMBIE_NAUTILUS_ID,
@@ -100,5 +106,8 @@ public class IWantItEarlier implements ModInitializer {
 
         FabricDefaultAttributeRegistry.register(NAUTILUS_ENTITY, AbstractNautilusEntity.createAbstractNautilusAttributes());
         FabricDefaultAttributeRegistry.register(ZOMBIE_NAUTILUS_ENTITY, AbstractNautilusEntity.createAbstractNautilusAttributes());
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.SAVANNA), SpawnGroup.MONSTER, EntityType.ZOMBIE_HORSE, 1, 1, 1);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OCEAN, BiomeKeys.COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.WARM_OCEAN, BiomeKeys.FROZEN_OCEAN), SpawnGroup.UNDERGROUND_WATER_CREATURE, NAUTILUS_ENTITY, 1, 1, 2);
     }
 }
