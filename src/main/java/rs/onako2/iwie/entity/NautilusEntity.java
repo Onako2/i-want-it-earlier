@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,6 +26,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import rs.onako2.iwie.IWantItEarlier;
 
 public class NautilusEntity extends AbstractNautilusEntity {
     private static final TrackedData<Boolean> CHILD = DataTracker.registerData(NautilusEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -189,6 +191,18 @@ public class NautilusEntity extends AbstractNautilusEntity {
 
     public void saddle(@Nullable SoundCategory sound) {
         this.dataTracker.set(SADDLED, true);
+    }
+
+    @Override
+    public void tick() {
+        if (hasPassengers()) {
+            if (getFirstPassenger() instanceof PlayerEntity player) {
+                if (player.isSubmergedInWater()) {
+                    player.addStatusEffect(new StatusEffectInstance(IWantItEarlier.BREATH_OF_NAUTILUS, 39, 0, true, false, true));
+                }
+            }
+        }
+        super.tick();
     }
 
     public int getBreedingAge() {

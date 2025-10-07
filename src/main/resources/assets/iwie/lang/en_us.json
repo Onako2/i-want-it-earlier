@@ -14,5 +14,6 @@
   "item.iwie.diamond_spear": "Diamond Spear",
   "item.iwie.netherite_spear": "Netherite Spear",
   "entity.iwie.nautilus": "Nautilus",
-  "entity.iwie.zombie_nautilus": "Zombie Nautilus"
+  "entity.iwie.zombie_nautilus": "Zombie Nautilus",
+  "effect.iwie.breath_of_the_nautilus": "Breath of the Nautilus"
 }

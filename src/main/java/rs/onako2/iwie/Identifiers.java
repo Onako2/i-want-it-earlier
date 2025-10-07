@@ -15,4 +15,5 @@ public class Identifiers {
     public static final Identifier GOLDEN_SPEAR_ID = Identifier.of(IWantItEarlier.MOD_ID, "golden_spear");
     public static final Identifier DIAMOND_SPEAR_ID = Identifier.of(IWantItEarlier.MOD_ID, "diamond_spear");
     public static final Identifier NETHERITE_SPEAR_ID = Identifier.of(IWantItEarlier.MOD_ID, "netherite_spear");
+    public static final Identifier BREATH_OF_THE_NAUTILUS_ID = Identifier.of(IWantItEarlier.MOD_ID, "breath_of_the_nautilus");
 }
