@@ -179,7 +179,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
                 }
             }
 
-            if (this.equipment.get(EquipmentSlot.SADDLE) != null && this.equipment.get(EquipmentSlot.SADDLE).getCount() >= 1) {
+            if (isSaddled()) {
                 this.putPlayerOnBack(player);
             }
             return ActionResult.SUCCESS;
@@ -300,7 +300,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
     }
 
     public boolean isSaddled() {
-        return this.dataTracker.get(SADDLED);
+        return this.equipment.get(EquipmentSlot.SADDLE) != null && this.equipment.get(EquipmentSlot.SADDLE).getCount() >= 1;
     }
 
     public void saddle(@Nullable SoundCategory sound) {

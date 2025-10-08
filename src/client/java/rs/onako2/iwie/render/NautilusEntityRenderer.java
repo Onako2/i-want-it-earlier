@@ -15,6 +15,7 @@ public class NautilusEntityRenderer extends AgeableMobEntityRenderer<NautilusEnt
 
     public NautilusEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new NautilusEntityModel(NautilusEntityModel.createBodyLayer().createModel()), new BabyNautilusEntityModel(BabyNautilusEntityModel.createBodyLayer().createModel()), 0.5F);
+        this.addFeature(new NautilusSaddleRenderer(this));
     }
 
     @Override
@@ -28,8 +29,10 @@ public class NautilusEntityRenderer extends AgeableMobEntityRenderer<NautilusEnt
 
         state.hasPassenger = entity.hasPassengers();
         state.isBaby = entity.isBaby();
+        state.isSaddled = entity.isSaddled();
     }
 
+    @Override
     public NautilusEntityRenderState createRenderState() {
         return new NautilusEntityRenderState();
     }

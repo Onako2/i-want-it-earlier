@@ -1,9 +1,12 @@
 package rs.onako2.iwie;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import org.apache.commons.lang3.SystemUtils;
+import rs.onako2.iwie.model.NautilusSaddleModel;
 import rs.onako2.iwie.render.NautilusEntityRenderer;
 import rs.onako2.iwie.render.ZombieNautilusEntityRenderer;
 
@@ -20,6 +23,7 @@ public class IWantItEarlierClient implements ClientModInitializer {
     public void onInitializeClient() {
         EntityRendererRegistry.register(IWantItEarlier.NAUTILUS_ENTITY, NautilusEntityRenderer::new);
         EntityRendererRegistry.register(IWantItEarlier.ZOMBIE_NAUTILUS_ENTITY, ZombieNautilusEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(new EntityModelLayer(Identifiers.NAUTILUS_ID, "saddle"), NautilusSaddleModel::getTexturedModelData);
 
         CompletableFuture.runAsync(() -> {
             while (client.getWindow() == null) {
