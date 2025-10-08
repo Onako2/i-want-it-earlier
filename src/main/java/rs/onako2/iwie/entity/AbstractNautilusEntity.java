@@ -5,13 +5,10 @@ import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.SwimNavigation;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.PlayerInput;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class AbstractNautilusEntity extends SquidEntity {
 
@@ -47,11 +44,6 @@ public class AbstractNautilusEntity extends SquidEntity {
 
         }
         super.tickMovement();
-    }
-
-    @Override
-    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
     }
 
     @Override

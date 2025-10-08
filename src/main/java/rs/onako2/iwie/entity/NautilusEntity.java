@@ -1,8 +1,13 @@
 package rs.onako2.iwie.entity;
 
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.UseRemainderComponent;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.ExperienceOrbEntity;
+import net.minecraft.entity.LazyEntityReference;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.TemptGoal;
@@ -16,38 +21,147 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.iwie.IWantItEarlier;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public class NautilusEntity extends AbstractNautilusEntity {
     private static final TrackedData<Boolean> CHILD = DataTracker.registerData(NautilusEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SADDLED =
             DataTracker.registerData(NautilusEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    public int harnessColor = -2;
     public boolean hasPassenger = false;
     public boolean isTempted = false;
     protected int breedingAge;
     protected int forcedAge;
+    private int loveTicks = 0;
+    @Nullable
+    private LazyEntityReference<ServerPlayerEntity> lovingPlayer;
 
     public NautilusEntity(EntityType<? extends SquidEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    public void breed(ServerWorld world, NautilusEntity other) {
+        PassiveEntity passiveEntity = this.createChild(world, other);
+        if (passiveEntity != null) {
+            passiveEntity.setBaby(true);
+            passiveEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+            this.breed(world, other, passiveEntity);
+            world.spawnEntityAndPassengers(passiveEntity);
+        }
+    }
+
+
+    @Override
+    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return IWantItEarlier.NAUTILUS_ENTITY.create(world, SpawnReason.BREEDING);
+    }
+
+    public void resetLoveTicks() {
+        this.loveTicks = 0;
+    }
+
+    @Nullable
+    public ServerPlayerEntity getLovingPlayer() {
+        return (ServerPlayerEntity) getWorld().getPlayerByUuid(Objects.requireNonNull(lovingPlayer).getUuid());
+    }
+
+    public void breed(ServerWorld world, NautilusEntity other, @Nullable PassiveEntity baby) {
+        Optional.ofNullable(this.getLovingPlayer()).or(() -> Optional.ofNullable(other.getLovingPlayer())).ifPresent(player -> {
+            player.incrementStat(Stats.ANIMALS_BRED);
+        });
+        this.setBreedingAge(6000);
+        other.setBreedingAge(6000);
+        this.resetLoveTicks();
+        other.resetLoveTicks();
+        world.sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
+        if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+            world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
+        }
+    }
+
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.isOf(Items.PUFFERFISH);
+    }
+
+    protected void eat(PlayerEntity player, Hand hand, ItemStack stack) {
+        int i = stack.getCount();
+        UseRemainderComponent useRemainderComponent = stack.get(DataComponentTypes.USE_REMAINDER);
+        stack.decrementUnlessCreative(1, player);
+        if (useRemainderComponent != null) {
+            ItemStack itemStack = useRemainderComponent.convert(stack, i, player.isInCreativeMode(), player::giveOrDropStack);
+            player.setStackInHand(hand, itemStack);
+        }
+    }
+
+    public void lovePlayer(@Nullable PlayerEntity player) {
+        this.loveTicks = 600;
+        if (player instanceof ServerPlayerEntity serverPlayerEntity) {
+            this.lovingPlayer = new LazyEntityReference<>(serverPlayerEntity);
+        }
+
+        this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
+    }
+
+    protected void playEatSound() {
+        this.playSound(SoundEvents.ENTITY_CAT_EAT, 0.9F, 1.0F);
+    }
+
+    public boolean canEat() {
+        return this.loveTicks <= 0;
+    }
+
+    public boolean isInLove() {
+        return this.loveTicks > 0;
+    }
+
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+
+        if (this.isBreedingItem(itemStack)) {
+            int i = this.getBreedingAge();
+            if (player instanceof ServerPlayerEntity serverPlayerEntity && i == 0 && this.canEat()) {
+                this.eat(player, hand, itemStack);
+                this.lovePlayer(serverPlayerEntity);
+                this.playEatSound();
+                NautilusEntity entity = (NautilusEntity) getWorld().getOtherEntities(this, this.getBoundingBox().expand(32, 32, 32), entityx -> entityx instanceof NautilusEntity && ((NautilusEntity) entityx).isInLove()).stream().findAny().orElse(null);
+                if (entity != null) {
+                    breed((ServerWorld) getWorld(), entity);
+                }
+                return ActionResult.SUCCESS_SERVER;
+            }
+
+            if (this.isBaby()) {
+                this.eat(player, hand, itemStack);
+                this.growUp(toGrowUpAge(-i), true);
+                this.playEatSound();
+                return ActionResult.SUCCESS;
+            }
+
+            if (this.getWorld().isClient) {
+                return ActionResult.CONSUME;
+            }
+        }
         if (this.hasPassengers() || this.isBaby()) {
             return super.interactMob(player, hand);
         } else {
-            ItemStack itemStack = player.getStackInHand(hand);
             if (!itemStack.isEmpty()) {
                 ActionResult actionResult = itemStack.useOnEntity(player, this, hand);
                 if (player.getStackInHand(hand).isOf(Items.SADDLE) && !this.hasSaddleEquipped()) {
@@ -240,16 +354,14 @@ public class NautilusEntity extends AbstractNautilusEntity {
         }
     }
 
-    public void growUp(int age) {
-        this.growUp(age, false);
-    }
-
     @Override
     public void writeCustomData(WriteView view) {
         super.writeCustomData(view);
         view.putInt("Age", this.getBreedingAge());
         view.putInt("ForcedAge", this.forcedAge);
         view.putBoolean("Saddled", this.isSaddled());
+        view.putInt("InLove", this.loveTicks);
+        LazyEntityReference.writeData(this.lovingPlayer, view, "LoveCause");
     }
 
     @Override
@@ -257,24 +369,26 @@ public class NautilusEntity extends AbstractNautilusEntity {
         super.readCustomData(view);
         this.setBreedingAge(view.getInt("Age", 0));
         this.forcedAge = view.getInt("ForcedAge", 0);
+        this.loveTicks = view.getInt("InLove", 0);
+        this.lovingPlayer = LazyEntityReference.fromData(view, "LoveCause");
     }
 
     public static class SwimGoal extends SquidEntity.SwimGoal {
-        private final NautilusEntity squid;
+        private final NautilusEntity nautilus;
 
-        public SwimGoal(SquidEntity squid) {
-            super(squid);
-            this.squid = (NautilusEntity) squid;
+        public SwimGoal(SquidEntity nautilus) {
+            super(nautilus);
+            this.nautilus = (NautilusEntity) nautilus;
         }
 
         @Override
         public boolean canStart() {
-            return !squid.hasPassengers() && !squid.isTempted;
+            return !nautilus.hasPassengers() && !nautilus.isTempted;
         }
 
         @Override
         public void tick() {
-            if (squid.isTempted) {
+            if (nautilus.isTempted) {
                 stop();
                 return;
             }
@@ -284,7 +398,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
         @Override
         public void stop() {
             super.stop();
-            squid.swimVec = Vec3d.ZERO;
+            nautilus.swimVec = Vec3d.ZERO;
         }
     }
 }
