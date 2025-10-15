@@ -15,12 +15,14 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -38,8 +40,10 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.iwie.IWantItEarlier;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class NautilusEntity extends AbstractNautilusEntity {
     private static final TrackedData<Boolean> CHILD = DataTracker.registerData(NautilusEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -263,35 +267,9 @@ public class NautilusEntity extends AbstractNautilusEntity {
         this.goalSelector
                 .add(
                         0,
-                        new TemptGoal(
+                        new NautilusTemptGoal(
                                 this, 1.0, stack -> stack.isOf(Items.PUFFERFISH), false, 3.0
-                        ) {
-                            @Override
-                            protected void startMovingTo(PlayerEntity player) {
-                                Vec3d vec3d = player.getPos().subtract(this.mob.getPos());
-                                vec3d = vec3d.normalize().multiply(0.1);
-                                this.mob.move(MovementType.SELF, vec3d);
-                            }
-
-                            @Override
-                            public boolean canStart() {
-                                return super.canStart() && this.mob.canSee(this.closestPlayer);
-                            }
-
-                            @Override
-                            public void start() {
-                                NautilusEntity.this.isTempted = true;
-                                NautilusEntity.this.swimVec = Vec3d.ZERO;
-                                super.start();
-                            }
-
-                            @Override
-                            public void stop() {
-                                NautilusEntity.this.isTempted = false;
-                                NautilusEntity.this.swimVec = Vec3d.ZERO;
-                                super.stop();
-                            }
-                        }
+                        )
                 );
     }
 
@@ -373,6 +351,35 @@ public class NautilusEntity extends AbstractNautilusEntity {
         this.lovingPlayer = LazyEntityReference.fromData(view, "LoveCause");
     }
 
+    // writeCustomDataToNbt 1.21.5 and lower support
+    public void method_5652(NbtCompound nbt) {
+        try {
+            Method method = this.getClass().getSuperclass().getMethod("writeCustomDataToNbt", NbtCompound.class);
+            method.invoke(this, nbt);
+        } catch (Exception ignored) {}
+
+        nbt.putInt("Age", this.getBreedingAge());
+        nbt.putInt("ForcedAge", this.forcedAge);
+        nbt.putBoolean("Saddled", this.isSaddled());
+        nbt.putInt("InLove", this.loveTicks);
+        // bruh too complicated, trust me brother
+        //LazyEntityReference.writeData(this.lovingPlayer, view, "LoveCause");
+    }
+
+    // readCustomDataFromNbt 1.21.5 and lower support
+    public void method_5749(NbtCompound nbt) {
+        try {
+            Method method = this.getClass().getSuperclass().getMethod("readCustomDataFromNbt", NbtCompound.class);
+            method.invoke(this, nbt);
+        } catch (Exception ignored) {}
+
+        this.setBreedingAge(nbt.getInt("Age", 0));
+        this.forcedAge = nbt.getInt("ForcedAge", 0);
+        this.loveTicks = nbt.getInt("InLove", 0);
+        // bruh too complicated, trust me brother
+        //this.lovingPlayer = LazyEntityReference.fromData(nbt, "LoveCause");
+    }
+
     public static class SwimGoal extends SquidEntity.SwimGoal {
         private final NautilusEntity nautilus;
 
@@ -399,6 +406,54 @@ public class NautilusEntity extends AbstractNautilusEntity {
         public void stop() {
             super.stop();
             nautilus.swimVec = Vec3d.ZERO;
+        }
+    }
+
+    public class NautilusTemptGoal extends TemptGoal {
+        private final double range;
+
+        public NautilusTemptGoal(PathAwareEntity entity, double speed, Predicate<ItemStack> foodPredicate, boolean canBeScared, double range) {
+            super(entity, speed, foodPredicate, canBeScared);
+            this.range = range;
+        }
+
+        protected void startMovingTo(PlayerEntity player) {
+            Vec3d vec3d = player.getPos().subtract(NautilusEntity.this.getPos());
+            vec3d = vec3d.normalize().multiply(0.1);
+            NautilusEntity.this.move(MovementType.SELF, vec3d);
+        }
+
+        @Override
+        public void tick() {
+            NautilusEntity.this.getLookControl().lookAt(this.closestPlayer, NautilusEntity.this.getMaxHeadRotation() + 20, NautilusEntity.this.getMaxLookPitchChange());
+            if (NautilusEntity.this.squaredDistanceTo(this.closestPlayer) < this.range * this.range) {
+                try {
+                    this.stopMoving();
+                } catch (NoSuchMethodError e) {
+                    // we don't care about this anyway but better be safe than sorry
+                }
+            } else {
+                this.startMovingTo(this.closestPlayer);
+            }
+        }
+
+        @Override
+        public boolean canStart() {
+            return super.canStart() && NautilusEntity.this.canSee(this.closestPlayer);
+        }
+
+        @Override
+        public void start() {
+            NautilusEntity.this.isTempted = true;
+            NautilusEntity.this.swimVec = Vec3d.ZERO;
+            super.start();
+        }
+
+        @Override
+        public void stop() {
+            NautilusEntity.this.isTempted = false;
+            NautilusEntity.this.swimVec = Vec3d.ZERO;
+            super.stop();
         }
     }
 }

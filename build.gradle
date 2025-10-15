@@ -65,10 +65,22 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+sourceSets {
+    main {
+        java {
+            exclude 'net/minecraft/nbt/NbtCompound.java'
+        }
+    }
+}
+
 jar {
     from("LICENSE") {
         rename { "${it}_${project.base.archivesName.get()}" }
     }
+
+    // 1.21.5 and lower compatibility
+    exclude 'net/minecraft/nbt/NbtCompound.class'
+    exclude 'net/minecraft/nbt/NbtCompound$*.class'
 }
 
 // configure the maven publication
