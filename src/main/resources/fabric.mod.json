@@ -11,6 +11,7 @@
   "contact": {
     "homepage": "https://modrinth.com/mod/i-want-it-earlier",
     "sources": "https://github.com/Onako2/i-want-it-earlier",
+    "issues": "https://github.com/Onako2/i-want-it-earlier/issues",
     "discord": "https://discord.gg/nFpa776nQk"
   },
   "license": "MIT",
@@ -30,7 +31,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.16",
-    "minecraft": [">=1.21.2 <=1.21.10"],
+    "minecraft": ">=1.21.2 <=1.21.10",
     "java": ">=21",
     "fabric-api": ">=0.110"
   }
