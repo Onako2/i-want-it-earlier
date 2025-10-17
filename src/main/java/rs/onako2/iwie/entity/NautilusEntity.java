@@ -20,6 +20,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -40,8 +41,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rs.onako2.iwie.IWantItEarlier;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -56,6 +57,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
     private int loveTicks = 0;
     @Nullable
     private LazyEntityReference<ServerPlayerEntity> lovingPlayer;
+    protected SimpleInventory field_6962;
 
     public NautilusEntity(EntityType<? extends SquidEntity> entityType, World world) {
         super(entityType, world);
@@ -83,7 +85,11 @@ public class NautilusEntity extends AbstractNautilusEntity {
 
     @Nullable
     public ServerPlayerEntity getLovingPlayer() {
-        return (ServerPlayerEntity) getWorld().getPlayerByUuid(Objects.requireNonNull(lovingPlayer).getUuid());
+        try {
+            return (ServerPlayerEntity) getWorld().getPlayerByUuid(lovingPlayer.getUuid());
+        } catch (NullPointerException | NoClassDefFoundError e) {
+            return null;
+        }
     }
 
     public void breed(ServerWorld world, NautilusEntity other, @Nullable PassiveEntity baby) {
@@ -106,18 +112,28 @@ public class NautilusEntity extends AbstractNautilusEntity {
 
     protected void eat(PlayerEntity player, Hand hand, ItemStack stack) {
         int i = stack.getCount();
-        UseRemainderComponent useRemainderComponent = stack.get(DataComponentTypes.USE_REMAINDER);
+        UseRemainderComponent useRemainderComponent = null;
+        try {
+            useRemainderComponent = stack.get(DataComponentTypes.USE_REMAINDER);
+        } catch (NoSuchMethodError e) {
+            // ignore
+        }
         stack.decrementUnlessCreative(1, player);
         if (useRemainderComponent != null) {
             ItemStack itemStack = useRemainderComponent.convert(stack, i, player.isInCreativeMode(), player::giveOrDropStack);
             player.setStackInHand(hand, itemStack);
+        } else {
+            player.setStackInHand(hand, stack);
         }
     }
 
     public void lovePlayer(@Nullable PlayerEntity player) {
         this.loveTicks = 600;
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
-            this.lovingPlayer = new LazyEntityReference<>(serverPlayerEntity);
+            try {
+                this.lovingPlayer = new LazyEntityReference<>(serverPlayerEntity);
+            } catch (NoClassDefFoundError ignored) {
+            }
         }
 
         this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
@@ -133,6 +149,15 @@ public class NautilusEntity extends AbstractNautilusEntity {
 
     public boolean isInLove() {
         return this.loveTicks > 0;
+    }
+
+    @Override
+    public boolean hasSaddleEquipped() {
+        try {
+            return super.hasSaddleEquipped();
+        } catch (NoSuchMethodError e) {
+            return isSaddled();
+        }
     }
 
     @Override
@@ -191,7 +216,11 @@ public class NautilusEntity extends AbstractNautilusEntity {
     }
 
     public void equipSaddle(ItemStack stack) {
-        this.equipLootStack(EquipmentSlot.SADDLE, stack);
+        try {
+            this.equipLootStack(EquipmentSlot.SADDLE, stack);
+        } catch (NoSuchMethodError | NoSuchFieldError e) {
+            this.saddle(null);
+        }
     }
 
     public void equipNautilusArmor(PlayerEntity player, ItemStack stack) {
@@ -278,7 +307,11 @@ public class NautilusEntity extends AbstractNautilusEntity {
     }
 
     public boolean isSaddled() {
-        return this.equipment.get(EquipmentSlot.SADDLE) != null && this.equipment.get(EquipmentSlot.SADDLE).getCount() >= 1;
+        try {
+            return (this.equipment.get(EquipmentSlot.SADDLE) != null && this.equipment.get(EquipmentSlot.SADDLE).getCount() >= 1) || this.dataTracker.get(SADDLED);
+        } catch (NoSuchFieldError e) {
+            return this.dataTracker.get(SADDLED);
+        }
     }
 
     public void saddle(@Nullable SoundCategory sound) {
@@ -356,7 +389,8 @@ public class NautilusEntity extends AbstractNautilusEntity {
         try {
             Method method = this.getClass().getSuperclass().getMethod("writeCustomDataToNbt", NbtCompound.class);
             method.invoke(this, nbt);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         nbt.putInt("Age", this.getBreedingAge());
         nbt.putInt("ForcedAge", this.forcedAge);
@@ -371,13 +405,32 @@ public class NautilusEntity extends AbstractNautilusEntity {
         try {
             Method method = this.getClass().getSuperclass().getMethod("readCustomDataFromNbt", NbtCompound.class);
             method.invoke(this, nbt);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
-        this.setBreedingAge(nbt.getInt("Age", 0));
-        this.forcedAge = nbt.getInt("ForcedAge", 0);
-        this.loveTicks = nbt.getInt("InLove", 0);
+        try {
+            this.setBreedingAge(nbt.getInt("Age", 0));
+            this.forcedAge = nbt.getInt("ForcedAge", 0);
+            this.loveTicks = nbt.getInt("InLove", 0);
+        } catch (NoSuchMethodError e) {
+            try {
+                this.setBreedingAge(getOldInt(nbt, "Age"));
+                this.forcedAge = getOldInt(nbt, "ForcedAge");
+                this.loveTicks = getOldInt(nbt, "InLove");
+            } catch (NoSuchMethodError | NoSuchMethodException | InvocationTargetException |
+                     IllegalAccessException eMogus) {
+                e.printStackTrace();
+                eMogus.printStackTrace();
+            }
+        }
         // bruh too complicated, trust me brother
         //this.lovingPlayer = LazyEntityReference.fromData(nbt, "LoveCause");
+    }
+
+    private int getOldInt(NbtCompound nbt, String key) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        // getInt method_10550
+        Method method = NbtCompound.class.getMethod("method_10550", String.class);
+        return (int) method.invoke(nbt, key);
     }
 
     public static class SwimGoal extends SquidEntity.SwimGoal {

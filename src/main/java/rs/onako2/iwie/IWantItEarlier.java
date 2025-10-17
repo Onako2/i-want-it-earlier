@@ -69,13 +69,13 @@ public class IWantItEarlier implements ModInitializer {
     public static final Item NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(NAUTILUS_ENTITY, settings));
     public static final Item ZOMBIE_NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.ZOMBIE_NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(ZOMBIE_NAUTILUS_ENTITY, settings));
 
-    public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.WOOD, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.STONE, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item COPPER_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.COPPER_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item IRON_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.IRON_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.IRON, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item GOLDEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.GOLDEN_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.GOLD, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item DIAMOND_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.DIAMOND_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.DIAMOND, 7.0F, -2.4F).useCooldown(2.0f)));
-    public static final Item NETHERITE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NETHERITE_SPEAR_ID), settings -> new SpearItem(settings.sword(ToolMaterial.NETHERITE, 7.0F, -2.4F).fireproof().useCooldown(2.0f)));
+    public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.WOOD, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.STONE, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item COPPER_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.COPPER_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.IRON, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item IRON_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.IRON_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.IRON, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item GOLDEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.GOLDEN_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.GOLD, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item DIAMOND_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.DIAMOND_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.DIAMOND, 7.0F, -2.4F).useCooldown(2.0f)));
+    public static final Item NETHERITE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NETHERITE_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.NETHERITE, 7.0F, -2.4F).fireproof().useCooldown(2.0f)));
 
     private static final ItemGroup IWIE = FabricItemGroup.builder()
             .icon(() -> new ItemStack(NAUTILUS_SPAWN_EGG))
@@ -109,5 +109,9 @@ public class IWantItEarlier implements ModInitializer {
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.SAVANNA), SpawnGroup.MONSTER, EntityType.ZOMBIE_HORSE, 1, 1, 1);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OCEAN, BiomeKeys.COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.WARM_OCEAN, BiomeKeys.FROZEN_OCEAN), SpawnGroup.UNDERGROUND_WATER_CREATURE, NAUTILUS_ENTITY, 1, 1, 2);
+    }
+
+    public static Item.Settings sword(Item.Settings settings, ToolMaterial material, float attackDamage, float attackSpeed) {
+        return material.applySwordSettings(settings, attackDamage, attackSpeed);
     }
 }

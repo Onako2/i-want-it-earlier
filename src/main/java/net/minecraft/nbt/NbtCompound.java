@@ -5,7 +5,12 @@ import rs.onako2.iwie.IWantItEarlier;
 public final class NbtCompound {
     public int getInt(String key, int fallback) {
         ohNo();
-        return -1;
+        return 0;
+    }
+
+    public int getInt(String key) {
+        ohNo();
+        return 0;
     }
 
     public void putInt(String key, int value) {
@@ -16,6 +21,11 @@ public final class NbtCompound {
     }
 
     public boolean getBoolean(String key, boolean fallback) {
+        ohNo();
+        return false;
+    }
+
+    public boolean getBoolean(String key) {
         ohNo();
         return false;
     }
