@@ -1,0 +1,10 @@
+{
+  "parent": "iwie:item/stone_spear_hand",
+  "display": {
+    "gui": {
+      "rotation": [0, -90, 0],
+      "translation": [3, -2, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  }
+}

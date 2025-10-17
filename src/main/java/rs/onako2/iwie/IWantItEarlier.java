@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -66,8 +67,23 @@ public class IWantItEarlier implements ModInitializer {
 
     public static final Block TEST = Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, Identifiers.TEST_ID), AbstractBlock.Settings.create().strength(4.0f));
 
-    public static final Item NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(NAUTILUS_ENTITY, settings));
-    public static final Item ZOMBIE_NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.ZOMBIE_NAUTILUS_SPAWN_EGG), settings -> new SpawnEggItem(ZOMBIE_NAUTILUS_ENTITY, settings));
+    private static SpawnEggItem getEggItem(EntityType<? extends MobEntity> type, Item.Settings settings, int primaryColor, int secondaryColor) {
+        try {
+            // 1.21.3 and below
+            try {
+                java.lang.reflect.Constructor<SpawnEggItem> constructor = SpawnEggItem.class.getDeclaredConstructor(EntityType.class, int.class, int.class, Item.Settings.class);
+                constructor.setAccessible(true);
+                return constructor.newInstance(type, primaryColor, secondaryColor, settings);
+            } catch (ReflectiveOperationException ex) {
+                throw new RuntimeException("Failed to create SpawnEggItem", ex);
+            }
+        } catch (Exception e) {
+            return new SpawnEggItem(type, settings);
+        }
+    }
+
+    public static final Item NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.NAUTILUS_SPAWN_EGG), settings -> getEggItem(NAUTILUS_ENTITY, settings, -1, -1));
+    public static final Item ZOMBIE_NAUTILUS_SPAWN_EGG = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.ZOMBIE_NAUTILUS_SPAWN_EGG), settings -> getEggItem(ZOMBIE_NAUTILUS_ENTITY, settings, -1, -1));
 
     public static final Item WOODEN_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.WOODEN_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.WOOD, 7.0F, -2.4F).useCooldown(2.0f)));
     public static final Item STONE_SPEAR = Items.register(RegistryKey.of(RegistryKeys.ITEM, Identifiers.STONE_SPEAR_ID), settings -> new SpearItem(sword(settings, ToolMaterial.STONE, 7.0F, -2.4F).useCooldown(2.0f)));

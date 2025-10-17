@@ -22,8 +22,7 @@ public class AbstractNautilusEntity extends SquidEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new SquidEntity.EscapeAttackerGoal());
+        super.initGoals();
     }
 
     @Override
