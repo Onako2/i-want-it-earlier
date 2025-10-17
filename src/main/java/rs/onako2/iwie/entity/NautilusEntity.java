@@ -44,6 +44,7 @@ import rs.onako2.iwie.IWantItEarlier;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 public class NautilusEntity extends AbstractNautilusEntity {
@@ -86,7 +87,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
     @Nullable
     public ServerPlayerEntity getLovingPlayer() {
         try {
-            return (ServerPlayerEntity) getWorld().getPlayerByUuid(lovingPlayer.getUuid());
+            return (ServerPlayerEntity) world.getPlayerByUuid(lovingPlayer.getUuid());
         } catch (NullPointerException | NoClassDefFoundError e) {
             return null;
         }
@@ -131,12 +132,20 @@ public class NautilusEntity extends AbstractNautilusEntity {
         this.loveTicks = 600;
         if (player instanceof ServerPlayerEntity serverPlayerEntity) {
             try {
-                this.lovingPlayer = new LazyEntityReference<>(serverPlayerEntity);
-            } catch (NoClassDefFoundError ignored) {
+                this.lovingPlayer = LazyEntityReference.of(serverPlayerEntity);
+            } catch (NoClassDefFoundError | NoSuchMethodError e) {
+                try {
+                    this.lovingPlayer = (LazyEntityReference<ServerPlayerEntity>) LazyEntityReference.class
+                            .getDeclaredConstructor(UUID.class)
+                            .newInstance(serverPlayerEntity.getUuid());
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
 
-        this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
+        this.world.sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
     }
 
     protected void playEatSound() {
@@ -170,9 +179,9 @@ public class NautilusEntity extends AbstractNautilusEntity {
                 this.eat(player, hand, itemStack);
                 this.lovePlayer(serverPlayerEntity);
                 this.playEatSound();
-                NautilusEntity entity = (NautilusEntity) getWorld().getOtherEntities(this, this.getBoundingBox().expand(32, 32, 32), entityx -> entityx instanceof NautilusEntity && ((NautilusEntity) entityx).isInLove()).stream().findAny().orElse(null);
+                NautilusEntity entity = (NautilusEntity) world.getOtherEntities(this, this.getBoundingBox().expand(32, 32, 32), entityx -> entityx instanceof NautilusEntity && ((NautilusEntity) entityx).isInLove()).stream().findAny().orElse(null);
                 if (entity != null) {
-                    breed((ServerWorld) getWorld(), entity);
+                    breed((ServerWorld) world, entity);
                 }
                 return ActionResult.SUCCESS_SERVER;
             }
@@ -184,7 +193,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
                 return ActionResult.SUCCESS;
             }
 
-            if (this.getWorld().isClient) {
+            if (this.world.isClient) {
                 return ActionResult.CONSUME;
             }
         }
@@ -246,7 +255,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
     }
 
     protected void putPlayerOnBack(PlayerEntity player) {
-        if (!this.getWorld().isClient) {
+        if (!this.world.isClient) {
             player.setYaw(this.getYaw());
             player.setPitch(this.getPitch());
             player.startRiding(this);
@@ -331,7 +340,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
     }
 
     public int getBreedingAge() {
-        if (this.getWorld().isClient) {
+        if (this.world.isClient) {
             return this.dataTracker.get(CHILD) ? -1 : 1;
         } else {
             return this.breedingAge;
@@ -471,7 +480,7 @@ public class NautilusEntity extends AbstractNautilusEntity {
         }
 
         protected void startMovingTo(PlayerEntity player) {
-            Vec3d vec3d = player.getPos().subtract(NautilusEntity.this.getPos());
+            Vec3d vec3d = player.pos.subtract(NautilusEntity.this.pos);
             vec3d = vec3d.normalize().multiply(0.1);
             NautilusEntity.this.move(MovementType.SELF, vec3d);
         }

@@ -78,7 +78,13 @@ public class IWantItEarlier implements ModInitializer {
                 throw new RuntimeException("Failed to create SpawnEggItem", ex);
             }
         } catch (Exception e) {
-            return new SpawnEggItem(type, settings);
+            try {
+                java.lang.reflect.Constructor<SpawnEggItem> constructor = SpawnEggItem.class.getDeclaredConstructor(EntityType.class, Item.Settings.class);
+                constructor.setAccessible(true);
+                return constructor.newInstance(type, settings);
+            } catch (Exception ex) {
+                return new SpawnEggItem(settings.spawnEgg(type));
+            }
         }
     }
 

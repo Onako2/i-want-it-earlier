@@ -27,9 +27,9 @@ public class ZombieHorseEntityMixin extends AbstractHorseEntity {
         if (spawnReason == SpawnReason.NATURAL) {
             ZombieEntity zombie = new ZombieEntity(EntityType.ZOMBIE, (World) world);
             zombie.equipStack(EquipmentSlot.MAINHAND, new ItemStack(IWantItEarlier.WOODEN_SPEAR));
-            zombie.refreshPositionAndAngles(getPos(), getYaw(), getPitch());
+            zombie.refreshPositionAndAngles(pos, getYaw(), getPitch());
             if (world.spawnEntity(zombie)) {
-                zombie.startRiding(this, true);
+                zombie.startRiding(this);
             }
         }
 

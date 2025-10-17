@@ -4,3 +4,7 @@ accessible class net/minecraft/entity/passive/SquidEntity$EscapeAttackerGoal
 accessible method net/minecraft/entity/passive/SquidEntity$EscapeAttackerGoal <init> (Lnet/minecraft/entity/passive/SquidEntity;)V
 accessible class net/minecraft/entity/passive/SquidEntity$SwimGoal
 accessible method net/minecraft/entity/passive/SquidEntity$SwimGoal <init> (Lnet/minecraft/entity/passive/SquidEntity;)V
+accessible field net/minecraft/world/World isClient Z
+accessible class net/minecraft/entity/LazyEntityReference
+accessible field net/minecraft/entity/Entity pos Lnet/minecraft/util/math/Vec3d;
+accessible field net/minecraft/entity/Entity world Lnet/minecraft/world/World;
