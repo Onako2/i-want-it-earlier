@@ -1,0 +1,19 @@
+{
+  "block.iwie.test": "Teste",
+  "itemGroup.iwie.main": "Eu Quero Antes!",
+  "modmenu.nameTranslation.iwie": "Eu Quero Antes!",
+  "modmenu.descriptionTranslation.iwie": "Este mod adiciona itens e blocos antes mesmo de estarem no jogo!",
+  "modmenu.summaryTranslation.iwie": "Este mod adiciona itens e blocos antes mesmo de estarem no jogo!",
+  "item.iwie.nautilus_spawn_egg": "Ovo Gerador de Náutilo",
+  "item.iwie.zombie_nautilus_spawn_egg": "Ovo Gerador de Náutilo Zumbi",
+  "item.iwie.wooden_spear": "Lança de Madeira",
+  "item.iwie.stone_spear": "Lança de Pedra",
+  "item.iwie.copper_spear": "Lança de Cobre",
+  "item.iwie.iron_spear": "Lança de Ferro",
+  "item.iwie.golden_spear": "Lança de Ouro",
+  "item.iwie.diamond_spear": "Lança de Diamante",
+  "item.iwie.netherite_spear": "Lança de Netherita",
+  "entity.iwie.nautilus": "Náutilo",
+  "entity.iwie.zombie_nautilus": "Náutilo Zumbi",
+  "effect.iwie.breath_of_the_nautilus": "Sopro do Náutilo"
+}
